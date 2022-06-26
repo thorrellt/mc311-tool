@@ -18,6 +18,8 @@
 </head>
 
 <body>
+
+    <!-- BUS ARRIVAL SECTION -->
     <section class="row justify-content-center" id="ride-on-arrival">
         <div class="accordion col-md-10 col-lg-8 col-xl-6" id="ride-on-arrival-accordian">
             <div class="accordion-item">
@@ -58,6 +60,54 @@
                             </div>
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
                                 <button type="button" class="btn btn-primary" onclick="copyArrivalTime()">
+                                    <i class="bi bi-clipboard me-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DPS INSPECTION SCHEDULING -->
+    <section class="row justify-content-center" id="inspection-scheduler">
+        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="inspection-scheduler-accordian">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="inspection-scheduler-heading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#inspection-scheduler-body" aria-expanded="true"
+                        aria-controls="inspection-scheduler-body">
+                        DPS Inspection
+                    </button>
+                </h2>
+                <div id="inspection-scheduler-body" class="accordion-collapse collapse show"
+                    aria-labelledby="inspection-scheduler-heading" data-bs-parent="#inspection-scheduler-accordian">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="inspection-scheduler-permit-type" class="form-label">Permit Type</label>
+                                <input type="text" autocomplete="off" placeholder="e.g. Electrical" id="inspection-scheduler-permit-type" class="form-control"
+                                    aria-describedby="inspection-scheduler-permit-type-form">
+                                
+                            </div>
+                            <div class="col-2">
+                                <label for="inspection-scheduler-permit-number" class="form-label">Permit Numer</label>
+                                <input type="text" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="e.g. 953845" id="inspection-scheduler-permit-number" class="form-control"
+                                    aria-describedby="inspection-scheduler-permit-number-form">
+                                
+                            </div>
+                            <div class="col-2">
+                                <label for="inspection-scheduler-contact-id" class="form-label">Contact ID</label>
+                                <input type="text"  maxlength="8" autocomplete="off" placeholder="e.g. EB1684" id="inspection-scheduler-contact-id" class="form-control"
+                                    aria-describedby="inspection-scheduler-contact-id-form">
+                            </div>
+                            <div class="col-3">
+                                <label for="inspection-scheduler-inspection-type" class="form-label">Inspection Type</label>
+                                <input type="text"   autocomplete="off" placeholder="e.g. Final" id="inspection-scheduler-inspection-type" class="form-control"
+                                    aria-describedby="inspection-scheduler-inspection-type-form">
+                            </div>
+                            <div class="col-2 border-end  d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-primary" onclick="copyInspection()">
                                     <i class="bi bi-clipboard me-1"></i></button>
                             </div>
                         </div>
