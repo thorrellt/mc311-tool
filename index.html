@@ -33,31 +33,31 @@
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-4">
-                                <label for="ride-on-id" class="form-label">Stop ID</label>
-                                <input type="text" id="ride-on-id" class="form-control"
-                                    aria-describedby="ride-on-id-form">
-                                <div id="ride-on-id-form" class="form-text">
+                                <label for="ride-on-arrival-id" class="form-label">Stop ID</label>
+                                <input type="text" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="e.g. 23846"id="ride-on-arrival-id" class="form-control"
+                                    aria-describedby="ride-on-arrival-id-form">
+                                <div id="ride-on-arrival-id-form" class="form-text">
                                     Enter Stop ID
                                 </div>
                             </div>
                             <div class="col-3">
-                                <label for="ride-on-route" class="form-label">Route #</label>
-                                <input type="text" id="ride-on-route" class="form-control"
-                                    aria-describedby="ride-on-route-form">
-                                <div id="ride-on-route-form" class="form-text">
+                                <label for="ride-on-arrival-route" class="form-label">Route #</label>
+                                <input type="text" inputmode="numeric" maxlength="3" autocomplete="off" placeholder="e.g. 58" id="ride-on-arrival-route" class="form-control"
+                                    aria-describedby="ride-on-arrival-route-form">
+                                <div id="ride-on-arrival-route-form" class="form-text">
                                     Enter bus Route #
                                 </div>
                             </div>
                             <div class="col-3">
-                                <label for="ride-on-minutes" class="form-label">Minutes</label>
-                                <input type="text" id="ride-on-minutes" class="form-control"
-                                    aria-describedby="ride-on-minutes-form">
-                                <div id="ride-on-minutes-form" class="form-text">
+                                <label for="ride-on-arrival-minutes" class="form-label">Minutes</label>
+                                <input type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="e.g. 62" id="ride-on-arrival-minutes" class="form-control"
+                                    aria-describedby="ride-on-arrival-minutes-form">
+                                <div id="ride-on-arrival-minutes-form" class="form-text">
                                     Enter minutes until bus arrival
                                 </div>
                             </div>
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" onclick="copyArrivalTime()">
                                     <i class="bi bi-clipboard me-1"></i></button>
                             </div>
                         </div>
@@ -66,6 +66,8 @@
             </div>
         </div>
     </section>
+
+    <script src="scripts.js" type="text/javascript"></script>
 </body>
 
 </html>
