@@ -1,4 +1,8 @@
-function copyArrivalTime() {
+
+/*****************
+ * RIDE ON ARRIVAL
+ *****************/
+function copyArrivalTimeNotes() {
     //Gather User Inputs
     const stopID = document.getElementById("ride-on-arrival-id").value;
     const route = document.getElementById("ride-on-arrival-route").value;
@@ -22,6 +26,10 @@ function copyArrivalTime() {
     return Promise.reject('The Clipboard API is not available.');
 };
 
+
+/****************
+ * DPS INSPECTION 
+ ****************/
 //Utility Function to iterate business days
 Date.prototype.nextBusDay = function (){
     if(this.getDay() < 5) {
@@ -31,7 +39,7 @@ Date.prototype.nextBusDay = function (){
     }
 }
 
-function copyInspection(){
+function copyInspectionNotes(){
     //Gather User Inputs
     const permitType = document.getElementById("inspection-scheduler-permit-type").value;
     const permitNumber = document.getElementById("inspection-scheduler-permit-number").value;
@@ -68,6 +76,12 @@ function copyInspection(){
 
 }
 
+
+/****************************** 
+ * LOST & FOUND / DEPOT LOCATOR 
+ ******************************/
+ let selectedDay = 'Select Day';
+ let depot = ''
 //Collection of Depots for Bus routes
 const depots = {
     1: {weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring'},
@@ -156,12 +170,62 @@ const depots = {
     flex: {weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A'},
 }
 
-let selectedDay = '';
-// Make Dropdown text match Selection
-$(".dropdown-menu li button").click(function(){
-  
-    $("#lost-and-found-day:first-child").html($(this).text()+' <span class="caret"></span>');
+const depotPhoneNumbers = {
+    Gaithersburg : `240.777.5925`,
+    'Nicholson Court' : `240.777.5910`,
+    'Silver Spring' : `240.777.5960`,
+}
+
+function updateSelectedDay(){
     selectedDay = $(this).text().toLowerCase();
-    console.log(selectedDay);
+}
+
+function updateDayDropdown(){
+    $("#lost-and-found-day:first-child").html(selectedDay +' <span class="caret"></span>');
+}
+
+function updateDepot() {
+    //get selected route #    
+    const routeNumber = document.getElementById("lost-and-found-route-number").value;
     
-  });
+    //update depot variable
+    if (!depots[routeNumber]){
+        depot = `Route Not Found`;
+    } else {
+        depot = depots[routeNumber][selectedDay];
+    }
+  
+    //update the DOM
+    updateDayDropdown();
+    $("#depot-name").html(depot);
+}
+
+// Make Dropdown text match Selection
+$(".dropdown-menu li button").click(updateSelectedDay);
+// Update Depot name on change
+$(".dropdown-menu li button").click(updateDepot);
+$("#lost-and-found-route-number").change(updateDepot);
+
+function copyLostAndFoundNotes() {
+    //get selected route #    
+    const routeNumber = document.getElementById("lost-and-found-route-number").value;
+
+    //Build String for output
+    let notes = ``
+    switch(depot){
+        case 'Route Not Found':
+            notes = depot;
+            break;
+        
+        case 'N/A':
+            notes = `No depot. Route doesn't run on selected day`;
+            break;
+
+        default:
+            notes = `Calling about an item lost on the ${routeNumber}. I provided ${depotPhoneNumbers[depot]} to contact the ${depot} bus depot.`;
+    }
+    
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+      return navigator.clipboard.writeText(notes);
+    return Promise.reject('The Clipboard API is not available.');
+};

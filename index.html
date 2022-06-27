@@ -40,30 +40,24 @@
                                 <input type="text" inputmode="numeric" maxlength="5" autocomplete="off"
                                     placeholder="e.g. 23846" id="ride-on-arrival-id" class="form-control"
                                     aria-describedby="ride-on-arrival-id-form">
-                                <div id="ride-on-arrival-id-form" class="form-text">
-                                    Enter Stop ID
-                                </div>
+                                
                             </div>
                             <div class="col-3">
                                 <label for="ride-on-arrival-route" class="form-label">Route #</label>
                                 <input type="text" inputmode="numeric" maxlength="3" autocomplete="off"
                                     placeholder="e.g. 58" id="ride-on-arrival-route" class="form-control"
                                     aria-describedby="ride-on-arrival-route-form">
-                                <div id="ride-on-arrival-route-form" class="form-text">
-                                    Enter bus Route #
-                                </div>
+                                
                             </div>
                             <div class="col-3">
                                 <label for="ride-on-arrival-minutes" class="form-label">Minutes</label>
                                 <input type="text" inputmode="numeric" maxlength="2" autocomplete="off"
                                     placeholder="e.g. 62" id="ride-on-arrival-minutes" class="form-control"
                                     aria-describedby="ride-on-arrival-minutes-form">
-                                <div id="ride-on-arrival-minutes-form" class="form-text">
-                                    Enter minutes until bus arrival
-                                </div>
+                                
                             </div>
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
-                                <button type="button" class="btn btn-primary" onclick="copyArrivalTime()">
+                                <button type="button" class="btn btn-primary" onclick="copyArrivalTimeNotes()">
                                     <i class="bi bi-clipboard me-1"></i></button>
                             </div>
                         </div>
@@ -116,7 +110,7 @@
                                     aria-describedby="inspection-scheduler-inspection-type-form">
                             </div>
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
-                                <button type="button" class="btn btn-primary" onclick="copyInspection()">
+                                <button type="button" class="btn btn-primary" onclick="copyInspectionNotes()">
                                     <i class="bi bi-clipboard me-1"></i></button>
                             </div>
                         </div>
@@ -143,7 +137,7 @@
                             <div class="col-3 border-end  d-flex justify-content-center align-items-center">
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="lost-and-found-day"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        data-bs-toggle="dropdown" aria-expanded="false" style="text-transform: capitalize;">
                                         Select Day
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="lost-and-found-day">
@@ -157,27 +151,20 @@
                                 </div>
 
                             </div>
-                            <div class="col-2">
-                                <label for="lost-and-found-permit-number" class="form-label">Route Number</label>
-                                <input type="text" inputmode="numeric" maxlength="6" autocomplete="off"
-                                    placeholder="e.g. 46 or flex" id="lost-and-found-permit-number" class="form-control"
-                                    aria-describedby="lost-and-found-permit-number-form">
+                            <div class="col-3">
+                                <label for="lost-and-found-route-number" class="form-label">Route Number</label>
+                                <input type="text" maxlength="6" autocomplete="off"
+                                    placeholder="e.g. 46 or flex" id="lost-and-found-route-number" class="form-control"
+                                    aria-describedby="lost-and-found-route-number-form">
 
                             </div>
-                            <div class="col-2">
+                            <div class="col-4">
                                 <label for="lost-and-found-contact-id" class="form-label">Depot Name</label>
-                                <input type="text" maxlength="8" autocomplete="off" placeholder="e.g. EB1684"
-                                    id="lost-and-found-contact-id" class="form-control"
-                                    aria-describedby="lost-and-found-contact-id-form">
+                                <h5 id = depot-name></h5>
                             </div>
-                            <div class="col-3">
-                                <label for="lost-and-found-inspection-type" class="form-label">Inspection Type</label>
-                                <input type="text" autocomplete="off" placeholder="e.g. Final"
-                                    id="lost-and-found-inspection-type" class="form-control"
-                                    aria-describedby="lost-and-found-inspection-type-form">
-                            </div>
+                            
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
-                                <button type="button" class="btn btn-primary" onclick="copyInspection()">
+                                <button type="button" class="btn btn-primary" onclick="copyLostAndFoundNotes()">
                                     <i class="bi bi-clipboard me-1"></i></button>
                             </div>
                         </div>
