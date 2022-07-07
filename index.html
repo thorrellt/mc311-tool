@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <title>MC 311 Tool</title>
@@ -40,21 +40,21 @@
                                 <input type="text" inputmode="numeric" maxlength="5" autocomplete="off"
                                     placeholder="e.g. 23846" id="ride-on-arrival-id" class="form-control"
                                     aria-describedby="ride-on-arrival-id-form">
-                                
+
                             </div>
                             <div class="col-3">
                                 <label for="ride-on-arrival-route" class="form-label">Route #</label>
                                 <input type="text" inputmode="numeric" maxlength="3" autocomplete="off"
                                     placeholder="e.g. 58" id="ride-on-arrival-route" class="form-control"
                                     aria-describedby="ride-on-arrival-route-form">
-                                
+
                             </div>
                             <div class="col-3">
                                 <label for="ride-on-arrival-minutes" class="form-label">Minutes</label>
                                 <input type="text" inputmode="numeric" maxlength="2" autocomplete="off"
                                     placeholder="e.g. 62" id="ride-on-arrival-minutes" class="form-control"
                                     aria-describedby="ride-on-arrival-minutes-form">
-                                
+
                             </div>
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
                                 <button type="button" class="btn btn-primary" onclick="copyArrivalTimeNotes()">
@@ -66,6 +66,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- DPS INSPECTION SCHEDULING -->
     <section class="row justify-content-center" id="inspection-scheduler">
@@ -120,6 +121,7 @@
         </div>
     </section>
 
+
     <!-- LOST & FOUND / DEPOT LOCATOR -->
     <section class="row justify-content-center" id="lost-and-found">
         <div class="accordion col-md-10 col-lg-8 col-xl-6" id="lost-and-found-accordian">
@@ -136,8 +138,9 @@
                         <div class="row">
                             <div class="col-3 border-end  d-flex justify-content-center align-items-center">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="lost-and-found-day"
-                                        data-bs-toggle="dropdown" aria-expanded="false" style="text-transform: capitalize;">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="lost-and-found-day" data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="text-transform: capitalize;">
                                         Select Day
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="lost-and-found-day">
@@ -153,16 +156,79 @@
                             </div>
                             <div class="col-3">
                                 <label for="lost-and-found-route-number" class="form-label">Route Number</label>
-                                <input type="text" maxlength="6" autocomplete="off"
-                                    placeholder="e.g. 46 or flex" id="lost-and-found-route-number" class="form-control"
+                                <input type="text" maxlength="6" autocomplete="off" placeholder="e.g. 46 or flex"
+                                    id="lost-and-found-route-number" class="form-control"
                                     aria-describedby="lost-and-found-route-number-form">
 
                             </div>
                             <div class="col-4">
                                 <label for="lost-and-found-contact-id" class="form-label">Depot Name</label>
-                                <h5 id = depot-name></h5>
+                                <h5 id=depot-name></h5>
                             </div>
-                            
+
+                            <div class="col-2 border-end  d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-primary" onclick="copyLostAndFoundNotes()">
+                                    <i class="bi bi-clipboard me-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- RIDE ON STOD ID LOCATOR -->
+    <section class="row justify-content-center" id="stop-id">
+        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="stop-id-accordian">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="stop-id-heading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#stop-id-body" aria-expanded="true" aria-controls="stop-id-body">
+                        Stop ID Locator
+                    </button>
+                </h2>
+                <div id="stop-id-body" class="accordion-collapse collapse show" aria-labelledby="stop-id-heading"
+                    data-bs-parent="#stop-id-accordian">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="subject" class="form-label">Location</label>
+                                <div class="mb-4 input-group">
+
+                                    <select class="form-select" id="subject">
+                                        <option value="bethesda" selected>Bethesda</option>
+                                        <option value="forest_glen">Forest Glen</option>
+                                        <option value="friendship_heights">Friendship Heights</option>
+                                        <option value="germantown" selected>Germantown</option>
+                                        <option value="glenmont">Glenmont</option>
+                                        <option value="grosvenor">Grosvenor</option>
+                                        <option value="lakeforest" selected>Lakeforest</option>
+                                        <option value="medical_center">Medical Center</option>
+                                        <option value="montgomery_mall">Montgomery Mall</option>
+                                        <option value="rockville" selected>Rockville</option>
+                                        <option value="shady_grove">Shady Grove</option>
+                                        <option value="silver_spring">Silver Spring</option>
+                                        <option value="twinbrook">Twinbrook</option>
+                                        <option value="wheaton" selected>Wheaton</option>
+                                        <option value="white_flint">White Flint</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="stop-id-route-number" class="form-label">Route Number</label>
+                                <input type="text" maxlength="6" autocomplete="off" placeholder="e.g. 46 or flex"
+                                    id="stop-id-route-number" class="form-control"
+                                    aria-describedby="stop-id-route-number-form">
+
+                            </div>
+                            <div class="col-4">
+                                <label for="stop-id-contact-id" class="form-label">Depot Name</label>
+                                <h5 id=depot-name></h5>
+                            </div>
+
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
                                 <button type="button" class="btn btn-primary" onclick="copyLostAndFoundNotes()">
                                     <i class="bi bi-clipboard me-1"></i></button>
