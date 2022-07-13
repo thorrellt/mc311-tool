@@ -238,6 +238,15 @@ function copyLostAndFoundNotes() {
     return Promise.reject('The Clipboard API is not available.');
 };
 
+
+
+
+/****************** 
+ * COMMON STOP IDs
+ ******************/
+const stationDropdown = document.getElementById('stop-id-stations');
+const routesDropdown = document.getElementById('stop-id-routes');
+let selectedStation = stationDropdown.value;
 const transitStations = {
     'bethesda' : {
         20300:['34'],
@@ -316,3 +325,33 @@ const transitStations = {
         25542:['5', '26', '42', '46', '81', '101'],
         25610:['5', '26', '46', '81', '101'],},    
 }
+
+function updateRouteList(){
+    const stopIDs = Object.keys(transitStations[selectedStation])
+    const listLength = stopIDs.length;
+    const stationObject = transitStations[selectedStation];
+    
+    let stopList = [];
+
+    for (let i = 0; i < listLength; i++){
+        const stopID = stopIDs[i];
+        stopList.push(...stationObject[stopID]);
+    }
+    stopList = [...new Set(stopList)]
+        .map(value => Number(value))
+        .sort((a, b) => a - b)
+        .map(value => String(value));
+    console.log(stopList);
+
+    for (let i = 0; i < stopList.length; i++){
+        let option = document.createElement('option');
+        option.value = stopList[i];
+        option.text = stopList[i];
+        console.log(routesDropdown);
+        routesDropdown.add(option);
+    }
+    
+}
+
+updateRouteList();
+
