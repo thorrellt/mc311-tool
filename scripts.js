@@ -80,8 +80,10 @@ function copyInspectionNotes(){
 /****************************** 
  * LOST & FOUND / DEPOT LOCATOR 
  ******************************/
- let selectedDay = 'Select Day';
- let depot = ''
+const dayDropdown = document.getElementById('lost-and-found-day'); 
+let selectedDay = dayDropdown.value;
+let depot = ''
+ 
 //Collection of Depots for Bus routes
 const depots = {
     1: {weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring'},
@@ -177,7 +179,8 @@ const depotPhoneNumbers = {
 }
 
 function updateSelectedDay(){
-    selectedDay = $(this).text().toLowerCase();
+    selectedDay = dayDropdown.value;
+    console.log(selectedDay);
 }
 
 function updateDayDropdown(){
@@ -195,13 +198,18 @@ function updateDepot() {
         depot = depots[routeNumber][selectedDay];
     }
   
-    //update the DOM
-    updateDayDropdown();
+    // //update the DOM
+    // updateDayDropdown();
     $("#depot-name").html(depot);
 }
 
 // Make Dropdown text match Selection
-$(".dropdown-menu li button").click(updateSelectedDay);
+dayDropdown.addEventListener('change', () =>{
+    updateSelectedDay();
+    updateDepot();
+});
+
+
 // Update Depot name on change
 $(".dropdown-menu li button").click(updateDepot);
 $("#lost-and-found-route-number").change(updateDepot);
@@ -229,7 +237,6 @@ function copyLostAndFoundNotes() {
       return navigator.clipboard.writeText(notes);
     return Promise.reject('The Clipboard API is not available.');
 };
-
 
 const transitStations = {
     'bethesda' : {
