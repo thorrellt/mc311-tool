@@ -136,7 +136,18 @@
                     aria-labelledby="lost-and-found-heading" data-bs-parent="#lost-and-found-accordian">
                     <div class="accordion-body">
                         <div class="row">
-                            <div class="col-3 border-end  d-flex justify-content-center align-items-center">
+                            <div class="col-3">
+                                <label for="subject" class="form-label">Select Day</label>
+                                <div class="mb-4 input-group">
+
+                                    <select class="form-select" id="subject">
+                                        <option value="weekday" selected>Weekday</option>
+                                        <option value="saturday">Saturday</option>
+                                        <option value="sunday">Sunday</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="col-3 border-end  d-flex justify-content-center align-items-center">
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                         id="lost-and-found-day" data-bs-toggle="dropdown" aria-expanded="false"
@@ -153,7 +164,7 @@
                                     </ul>
                                 </div>
 
-                            </div>
+                            </div> -->
                             <div class="col-3">
                                 <label for="lost-and-found-route-number" class="form-label">Route Number</label>
                                 <input type="text" maxlength="6" autocomplete="off" placeholder="e.g. 46 or flex"
