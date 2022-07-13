@@ -347,11 +347,27 @@ function updateRouteList(){
         let option = document.createElement('option');
         option.value = stopList[i];
         option.text = stopList[i];
-        console.log(routesDropdown);
         routesDropdown.add(option);
     }
     
 }
+
+function clearRouteList() {
+    // let i, L = routesDropdown.options.length - 1;
+    // console.log("length: " + i);
+    // for(i = L; i >= 0; i--) {
+    //     routesDropdown.remove(i);
+    // }
+    $("#stop-id-routes").empty();
+ }
+
+// Make Dropdown text match Selection
+stationDropdown.addEventListener('change', () =>{
+    selectedStation = stationDropdown.value;
+    clearRouteList();
+    updateRouteList();
+});
+
 
 updateRouteList();
 
