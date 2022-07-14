@@ -244,10 +244,7 @@ function copyLostAndFoundNotes() {
 /****************** 
  * COMMON STOP IDs
  ******************/
-const stationDropdown = document.getElementById('stop-id-stations');
-const routesDropdown = document.getElementById('stop-id-routes');
-let selectedStation = stationDropdown.value;
-const transitStations = {
+ const transitStations = {
     'bethesda' : {
         20300:['34'],
         20306:['29', '32', '36'],
@@ -325,23 +322,157 @@ const transitStations = {
         25542:['5', '26', '42', '46', '81', '101'],
         25610:['5', '26', '46', '81', '101'],},    
 }
+const stations = {
+    'bethesda' : {
+        29:['20306', '20308'],
+        30:['20308'],
+        32:['20306', '20308'],
+        34:['20300'],
+        36:['20306', '20308'],
+        47:['20308'],
+        70:['20308'],},
+    'forest_glen' : {
+        7:['15276'],
+        8:['15272'],},
+    'friendship_heights' : {
+        1:['22700'],
+        11:['22700'],
+        23:['14769'],
+        29:['14769'],
+        34:['22700', '27356'],},
+    'germantown' : {
+        55:['20306', '20308'],
+        61:['20308'],
+        74:['20306', '20308'],
+        75:['20300'],
+        83:['20306', '20308'],
+        97:['20308'],
+        98:['20308'],
+        100:['20308'],},
+    'glenmont' : {
+        10:['29190'],
+        26:['29184', '29182'],
+        31:['29182'],
+        33:['29180'],
+        39:['29184', '29182'],
+        41:['29184', '29182'],
+        51:['29182', '29190'],
+        53:['29182'],
+        55:['29180'],},
+    'grosvenor' : {
+        6:['15298'],
+        37:['15298'],
+        46:['27730'],
+        96:['23164'],},
+    'lakeforest' : {
+        54:['23722'],
+        55:['23722'],
+        56:['23722'],
+        57:['23722'],
+        58:['23722'],
+        59:['23722'],
+        61:['23722'],
+        101:['30010'],},
+    'medical_center' : {
+        30:['24010'],
+        33:['24006'],
+        34:['24008'],
+        46:['24008'],
+        70:['24010'],
+        101:['24010'],},
+    'montgomery mall' : {
+        6:['17620'],
+        26:['17621'],
+        42:['17626'],
+        47:['17624'],
+        96:['17620'],},
+    'rockville' : {
+        44:['25662'],
+        45:['25652'],
+        46:['25654'],
+        47:['25662'],
+        48:['28216'],
+        49:['28216'],
+        52:['25652'],
+        54:['25660'],
+	55:['14775'],
+        56:['25660'],
+        59:['25650'],
+        63:['25660'],
+        81:['25662'],
+        101:['25656'],},
+    'shady_grove' : {
+        43:['14601', '26006'],
+        53:['14601'],
+        55:['14776'],
+        57:['14776'],
+        58:['14601'],
+        59:['14776'],
+        60:['14601'],
+        61:['14601'],
+        63:['14776'],
+        64:['14601'],
+        65:['14601'],
+        66:['14776'],
+        67:['14776'],
+        71:['14601'],
+        73:['14601'],
+	    74:['14601'],
+        76:['14601'],
+        78:['14601'],
+        79:['14601'],
+        90:['14601'],
+        101:['14601', '26012'],},
+    'silver_spring' : {
+        1:['17609'],
+        2:['17607'],
+        4:['17490'],
+        5:['17490'],
+        8:['17480'],
+        9:['17480'],
+        11:['17609'],
+        12:['17605'],
+        13:['17605'],
+	14:['17487'],
+        15:['17484'],
+        16:['17604'],
+        17:['17487'],
+        18:['17485'],
+        19:['17484'],
+        20:['17486'],
+        21:['17481'],
+        22:['17481'],
+        28:['17479'],},
+    'twinbrook' : {
+        5:['26588'],
+        10:['28424', '26580'],
+        26:['26580'],
+        44:['26582'],
+        45:['28424'],
+        46:['26586'],},
+    'wheaton' : {
+        9:['15416'],
+        31:['29740'],
+        34:['27186'],
+        38:['29740'],},
+    'white_flint' : {
+        5:['25542', '25610'],
+        26:['25542', '25610'],
+        42:['25542'],
+        46:['25542', '25610'],
+        81:['25542', '25610'],
+        101:['25542', '25610'],},    
+}
+
+const stationDropdown = document.getElementById('stop-id-stations');
+const routesDropdown = document.getElementById('stop-id-routes');
+let selectedStation = stationDropdown.value;
+let selectedRoute = routesDropdown.value;
+let stopID = "";
+
 
 function updateRouteList(){
-    const stopIDs = Object.keys(transitStations[selectedStation])
-    const listLength = stopIDs.length;
-    const stationObject = transitStations[selectedStation];
-    
-    let stopList = [];
-
-    for (let i = 0; i < listLength; i++){
-        const stopID = stopIDs[i];
-        stopList.push(...stationObject[stopID]);
-    }
-    stopList = [...new Set(stopList)]
-        .map(value => Number(value))
-        .sort((a, b) => a - b)
-        .map(value => String(value));
-    console.log(stopList);
+    let stopList = Object.keys(stations[selectedStation]);
 
     for (let i = 0; i < stopList.length; i++){
         let option = document.createElement('option');
@@ -349,15 +480,11 @@ function updateRouteList(){
         option.text = stopList[i];
         routesDropdown.add(option);
     }
-    
+    selectedRoute = routesDropdown.value; 
+      
 }
 
 function clearRouteList() {
-    // let i, L = routesDropdown.options.length - 1;
-    // console.log("length: " + i);
-    // for(i = L; i >= 0; i--) {
-    //     routesDropdown.remove(i);
-    // }
     $("#stop-id-routes").empty();
  }
 
@@ -366,8 +493,29 @@ stationDropdown.addEventListener('change', () =>{
     selectedStation = stationDropdown.value;
     clearRouteList();
     updateRouteList();
+    updateStopID();  
+});
+
+routesDropdown.addEventListener('change', () =>{
+    selectedRoute = routesDropdown.value;
+    updateStopID()  ;
 });
 
 
-updateRouteList();
+function updateStopID() {
+    stopID = stations[selectedStation][selectedRoute][0];
+    console.log(selectedRoute);
+    console.log(stopID);
+  
+    //update the DOM
+    $("#stop-id-id").html(stopID);
+}
 
+function copyStopIdNotes(){
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+      return navigator.clipboard.writeText(stopID);
+    return Promise.reject('The Clipboard API is not available.');
+}
+
+updateRouteList();
+updateStopID();
