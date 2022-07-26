@@ -380,7 +380,7 @@ const stations = {
         46:['24008'],
         70:['24010'],
         101:['24010'],},
-    'montgomery mall' : {
+    'montgomery_mall' : {
         6:['17620'],
         26:['17621'],
         42:['17626'],
@@ -506,9 +506,13 @@ function updateStopID() {
     stopID = stations[selectedStation][selectedRoute][0];
     console.log(selectedRoute);
     console.log(stopID);
-  
-    //update the DOM
-    $("#stop-id-id").html(stopID);
+
+    if (stations[selectedStation][selectedRoute].length > 1) {
+        $("#stop-id-id").html(stopID + " or " + stations[selectedStation][selectedRoute][1])
+    } else {
+        $("#stop-id-id").html(stopID);
+    }
+
 }
 
 function copyStopIdNotes(){
