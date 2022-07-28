@@ -9,6 +9,10 @@ function copyNotes(notes) {
 }
 
 
+
+
+
+
 /*****************
  * RIDE ON ARRIVAL
  *****************/
@@ -563,3 +567,19 @@ function copyStopIdNotes() {
 
 updateRouteList();
 updateStopID();
+
+
+const arrivalCopyBtn = document.getElementById('ride-on-arrival-copy-btn');
+arrivalCopyBtn.addEventListener("click", copyArrivalTimeNotes);
+
+const schedulerCopyBtn = document.getElementById('inspection-scheduler-copy-btn');
+schedulerCopyBtn.addEventListener("click", copyInspectionNotes);
+
+const lostAndFoundCopyBtn = document.getElementById('lost-and-found-copy-btn');
+lostAndFoundCopyBtn.addEventListener("click", copyLostAndFoundNotes);
+
+const stopIdCopyBtn = document.getElementById('stop-id-copy-btn');
+stopIdCopyBtn.addEventListener("click", copyStopIdNotes);
+
+
+
