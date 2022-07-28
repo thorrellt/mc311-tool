@@ -1,5 +1,5 @@
 function clearSelectList(listName) {
-    $("#"+listName).empty();
+    $("#" + listName).empty();
 }
 
 function copyNotes(notes) {
@@ -258,7 +258,7 @@ function copyLostAndFoundNotes() {
 /****************** 
  * COMMON STOP IDs
  ******************/
-const transitStations = {
+const stationIds = {
     'bethesda': {
         20300: ['34'],
         20306: ['29', '32', '36'],
@@ -351,7 +351,7 @@ const transitStations = {
         25610: ['5', '26', '46', '81', '101'],
     },
 }
-const stations = {
+const stationRoutes = {
     'bethesda': {
         29: ['20306', '20308'],
         30: ['20308'],
@@ -505,7 +505,25 @@ const stations = {
         46: ['25542', '25610'],
         81: ['25542', '25610'],
         101: ['25542', '25610'],
-    },
+    }
+}
+const stationNames = {
+    'bethesda': 'Bethesda',
+    'forest_glen': 'Forest Glen',
+    'friendship_heights': 'Friendship Heights',
+    'germantown"': 'Germantown',
+    'glenmont': 'Glenmont',
+    'grosvenor': 'Grosvenor',
+    'lakeforest': 'Lakeforest',
+    'medical_center': 'Medical Center',
+    'montgomery_mall': 'Montgomery Mall',
+    'rockville': 'Rockville',
+    'shady_grove': 'Shady Grove',
+    'silver_spring': 'Silver Spring',
+    'twinbrook': 'Twinbrook',
+    'wheaton': 'Wheaton',
+    'white_flint': 'White Flint',
+
 }
 
 const stationDropdown = document.getElementById('stop-id-stations');
@@ -516,7 +534,7 @@ let stopID = "";
 
 
 function updateRouteList() {
-    let stopList = Object.keys(stations[selectedStation]);
+    let stopList = Object.keys(stationRoutes[selectedStation]);
 
     for (let i = 0; i < stopList.length; i++) {
         let option = document.createElement('option');
@@ -547,12 +565,12 @@ routesDropdown.addEventListener('change', () => {
 
 
 function updateStopID() {
-    stopID = stations[selectedStation][selectedRoute][0];
+    stopID = stationRoutes[selectedStation][selectedRoute][0];
     console.log(selectedRoute);
     console.log(stopID);
 
-    if (stations[selectedStation][selectedRoute].length > 1) {
-        $("#stop-id-id").html(stopID + " or " + stations[selectedStation][selectedRoute][1])
+    if (stationRoutes[selectedStation][selectedRoute].length > 1) {
+        $("#stop-id-id").html(stopID + " or " + stationRoutes[selectedStation][selectedRoute][1])
     } else {
         $("#stop-id-id").html(stopID);
     }
