@@ -1,4 +1,4 @@
-function clearSelectList(listName) {
+function clearList(listName) {
     $("#" + listName).empty();
 }
 
@@ -8,7 +8,17 @@ function copyNotes(notes) {
     return Promise.reject('The Clipboard API is not available.');
 }
 
+function fillDropdownList(listObject, listElement) {
+    const listDisplayText = Object.values(listObject);
+    const listValues = Object.keys(listObject);
 
+    for (let i = 0; i < listDisplayText.length; i++) {
+        let option = document.createElement('option');
+        option.value = listValues[i];
+        option.text = listDisplayText[i];
+        listElement.add(option);
+    }
+}
 
 
 
@@ -514,7 +524,10 @@ const stationNames = {
 
 }
 
+
+
 const stationDropdown = document.getElementById('stop-id-stations');
+fillDropdownList(stationNames, stationDropdown);
 const routesDropdown = document.getElementById('stop-id-routes');
 let selectedStation = stationDropdown.value;
 let selectedRoute = routesDropdown.value;
@@ -534,14 +547,11 @@ function updateRouteList() {
 
 }
 
-function clearRouteList() {
-    $("#stop-id-routes").empty();
-}
 
 // Make Dropdown text match Selection
 stationDropdown.addEventListener('change', () => {
     selectedStation = stationDropdown.value;
-    clearRouteList();
+    clearList('stop-id-routes');
     updateRouteList();
     updateStopID();
 });
@@ -585,9 +595,26 @@ const lostAndFoundCopyBtn = document.getElementById('lost-and-found-copy-btn');
 lostAndFoundCopyBtn.addEventListener("click", copyLostAndFoundNotes);
 
 const stopIdCopyBtn = document.getElementById('stop-id-copy-btn');
-stopIdCopyBtn.addEventListener("click", function(){
+stopIdCopyBtn.addEventListener("click", function () {
     copyNotes(stopID);
 });
 
 
+/******************** 
+ * COMMON CALL NOTES
+ ********************/
 
+const commonCallSubjects = {
+    'disc-rep': "Disconnect-Rep initiated(No response)",
+    'disc-caller': "Disconnect-Caller initiated",
+    'sw-slide': "Solid Waste-Slide Week",
+    'sw-no-trash': "Solid Waste-No County Trash Service",
+    'sw-station': "Solid Waste-Transfer Station Info",
+    'rrp-apply': "RRP-How to apply",
+    'rrp-status': "RRP-How to check status",
+}
+
+
+const commonCallsDropdown = document.getElementById('common-calls-subject');
+
+fillDropdownList(commonCallSubjects, commonCallsDropdown);
