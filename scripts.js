@@ -32,12 +32,7 @@ function copyArrivalTimeNotes() {
     } else {
         notes += `Advised ${minutes} minutes.`
     }
-
-    console.log(minutes);
-    console.log(notes);
-    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-        return navigator.clipboard.writeText(notes);
-    return Promise.reject('The Clipboard API is not available.');
+    copyNotes(notes);
 };
 
 
@@ -82,11 +77,7 @@ function copyInspectionNotes() {
         notes += `inspection for ${scheduledDate.toLocaleDateString()}. `;
     }
 
-
-    console.log(notes);
-    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-        return navigator.clipboard.writeText(notes);
-    return Promise.reject('The Clipboard API is not available.');
+    copyNotes(notes);
 
 }
 
@@ -99,7 +90,7 @@ let selectedDay = dayDropdown.value;
 let depot = ''
 
 //Collection of Depots for Bus routes
-const depots = {
+const depotsByRoutes = {
     1: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
     2: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
     3: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
@@ -206,10 +197,10 @@ function updateDepot() {
     const routeNumber = document.getElementById("lost-and-found-route-number").value;
 
     //update depot variable
-    if (!depots[routeNumber]) {
+    if (!depotsByRoutes[routeNumber]) {
         depot = `Route Not Found`;
     } else {
-        depot = depots[routeNumber][selectedDay];
+        depot = depotsByRoutes[routeNumber][selectedDay];
     }
 
     // //update the DOM
@@ -246,10 +237,7 @@ function copyLostAndFoundNotes() {
         default:
             notes = `Calling about an item lost on the ${routeNumber}. I provided ${depotPhoneNumbers[depot]} to contact the ${depot} bus depot.`;
     }
-
-    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-        return navigator.clipboard.writeText(notes);
-    return Promise.reject('The Clipboard API is not available.');
+    copyNotes(notes)
 };
 
 
@@ -258,7 +246,7 @@ function copyLostAndFoundNotes() {
 /****************** 
  * COMMON STOP IDs
  ******************/
-const stationIds = {
+const routesByIdsByStation = {
     'bethesda': {
         20300: ['34'],
         20306: ['29', '32', '36'],
@@ -351,7 +339,7 @@ const stationIds = {
         25610: ['5', '26', '46', '81', '101'],
     },
 }
-const stationRoutes = {
+const IdsByRoutesByStation = {
     'bethesda': {
         29: ['20306', '20308'],
         30: ['20308'],
@@ -534,7 +522,7 @@ let stopID = "";
 
 
 function updateRouteList() {
-    let stopList = Object.keys(stationRoutes[selectedStation]);
+    let stopList = Object.keys(IdsByRoutesByStation[selectedStation]);
 
     for (let i = 0; i < stopList.length; i++) {
         let option = document.createElement('option');
@@ -565,12 +553,12 @@ routesDropdown.addEventListener('change', () => {
 
 
 function updateStopID() {
-    stopID = stationRoutes[selectedStation][selectedRoute][0];
+    stopID = IdsByRoutesByStation[selectedStation][selectedRoute][0];
     console.log(selectedRoute);
     console.log(stopID);
 
-    if (stationRoutes[selectedStation][selectedRoute].length > 1) {
-        $("#stop-id-id").html(stopID + " or " + stationRoutes[selectedStation][selectedRoute][1])
+    if (IdsByRoutesByStation[selectedStation][selectedRoute].length > 1) {
+        $("#stop-id-id").html(stopID + " or " + IdsByRoutesByStation[selectedStation][selectedRoute][1])
     } else {
         $("#stop-id-id").html(stopID);
     }
@@ -597,7 +585,9 @@ const lostAndFoundCopyBtn = document.getElementById('lost-and-found-copy-btn');
 lostAndFoundCopyBtn.addEventListener("click", copyLostAndFoundNotes);
 
 const stopIdCopyBtn = document.getElementById('stop-id-copy-btn');
-stopIdCopyBtn.addEventListener("click", copyStopIdNotes);
+stopIdCopyBtn.addEventListener("click", function(){
+    copyNotes(stopID);
+});
 
 
 
