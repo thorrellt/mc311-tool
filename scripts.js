@@ -547,7 +547,6 @@ function updateRouteList() {
 
 }
 
-
 // Make Dropdown text match Selection
 stationDropdown.addEventListener('change', () => {
     selectedStation = stationDropdown.value;
@@ -560,7 +559,6 @@ routesDropdown.addEventListener('change', () => {
     selectedRoute = routesDropdown.value;
     updateStopID();
 });
-
 
 function updateStopID() {
     stopID = IdsByRoutesByStation[selectedStation][selectedRoute][0];
@@ -584,7 +582,6 @@ function copyStopIdNotes() {
 updateRouteList();
 updateStopID();
 
-
 const arrivalCopyBtn = document.getElementById('ride-on-arrival-copy-btn');
 arrivalCopyBtn.addEventListener("click", copyArrivalTimeNotes);
 
@@ -605,7 +602,7 @@ stopIdCopyBtn.addEventListener("click", function () {
  ********************/
 
 const commonCallSubjects = {
-    'disc-rep': "Disconnect-Rep initiated(No response)",
+    'disc-rep': "Disconnect-Rep initiated (No response)",
     'disc-caller': "Disconnect-Caller initiated",
     'sw-slide': "Solid Waste-Slide Week",
     'sw-no-trash': "Solid Waste-No County Trash Service",
@@ -614,7 +611,33 @@ const commonCallSubjects = {
     'rrp-status': "RRP-How to check status",
 }
 
+const commonCallNotes = {
+    'disc-rep': "Caller stopped responding. Read no response disclose and disconnected call",
+    'disc-caller': "Caller stopped responding, then call dropped.",
+    'sw-slide': "Advised of 1 day slide this week due to Holiday.",
+    'sw-no-trash': "Advised we do not provide trash to this address and to reach out to private collector.",
+    'sw-station': "Gave info about Transfer Station Including:\n" +
+    "Hours: M-Sa 7am-5pm & Su 9am-5pm\n" +
+    "Cost: 500lbs free then $60/ton\n" +
+    "Location: 16101 Frederick Rd, Derwood, MD 20855",
+    'rrp-apply': "Gave info about applying for RRP including:\n" +
+    "Where to apply online.\n" +
+    "What non-profits can help apply.\n" +
+    "Emailed KBA to apply.",
+    'rrp-status': "Advised RRP status can be checked by logging into RRP portal or emailing HHS@montgomerycountymd.gov.",
+}
+
 
 const commonCallsDropdown = document.getElementById('common-calls-subject');
 
 fillDropdownList(commonCallSubjects, commonCallsDropdown);
+
+function currentSubjectNotes(){
+    return commonCallNotes[commonCallsDropdown.value];
+}
+
+const commonCallCopyBtn = document.getElementById('common-calls-copt-btn');
+
+commonCallCopyBtn.addEventListener("click", function () {
+    copyNotes(currentSubjectNotes());
+});

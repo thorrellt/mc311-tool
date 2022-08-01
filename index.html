@@ -244,12 +244,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="common-calls-heading">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#common-calls-body" aria-expanded="true" aria-controls="common-calls-body">
+                        data-bs-target="common-calls-body" aria-expanded="true" aria-controls="common-calls-body">
                         Common Call Notes
                     </button>
                 </h2>
                 <div id="common-calls-body" class="accordion-collapse collapse show"
-                    aria-labelledby="common-calls-heading" data-bs-parent="#common-calls-accordian">
+                    aria-labelledby="common-calls-heading" data-bs-parent="common-calls-accordian">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-10">
@@ -263,7 +263,7 @@
                             </div>
 
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
-                                <button type="button" class="btn btn-primary" onclick="copyLostAndFoundNotes()">
+                                <button id="common-calls-copt-btn" type="button" class="btn btn-primary">
                                     <i class="bi bi-clipboard me-1"></i></button>
                             </div>
                         </div>
