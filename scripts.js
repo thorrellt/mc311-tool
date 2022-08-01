@@ -2,9 +2,16 @@ function clearList(listName) {
     $("#" + listName).empty();
 }
 
+function showToast(){
+    $('.toast').toast('show');
+}
+
 function copyNotes(notes) {
-    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+        showToast();
         return navigator.clipboard.writeText(notes);
+    }
+        
     return Promise.reject('The Clipboard API is not available.');
 }
 
@@ -641,3 +648,4 @@ const commonCallCopyBtn = document.getElementById('common-calls-copt-btn');
 commonCallCopyBtn.addEventListener("click", function () {
     copyNotes(currentSubjectNotes());
 });
+
