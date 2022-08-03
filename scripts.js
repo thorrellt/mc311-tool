@@ -643,9 +643,59 @@ function currentSubjectNotes(){
     return commonCallNotes[commonCallsDropdown.value];
 }
 
-const commonCallCopyBtn = document.getElementById('common-calls-copt-btn');
+const commonCallCopyBtn = document.getElementById('common-calls-copy-btn');
 
 commonCallCopyBtn.addEventListener("click", function () {
     copyNotes(currentSubjectNotes());
 });
 
+
+/************************ 
+ * COMMON TRANSFER NOTES
+ ************************/
+
+const xferPhoneNums = {
+    "boe-boe": "7-8683",
+    "dot-highway": "7-7623",
+    "dot-engineering": "7-2190",
+    "fin-payments": "7-8898",
+    "fin-payroll": "7-8840",
+    "hhs-lar": "7-3986",
+    "hhs-oess": "7-1003",
+    "non-boe": "410-230-6163",
+    "non-mva": "800-950-1682",
+    "hhs-covid": "7-2982",
+    "hhs-odc": "7-1755",
+    "dot-parking": "7-8740",
+    "non-sdat": "888-246-5941",
+    "non-sha": "301-513-7300",
+}
+
+const xferDepartments =
+{
+    "boe-boe": "BOE: Board of Elections",
+    "dot-highway": "DOT: Highway Services",
+    "dot-engineering": "DOT: Traffic Engineering",
+    "fin-payments": "FIN: Pay by Phone",
+    "fin-payroll": "FIN: Payroll",
+    "hhs-lar": "HHS: Licensure and Regulatory",
+    "hhs-oess": "HHS: Office of Eligibilty and Support Services",
+    "non-boe": "Non-MCG: Maryland State Board of Electricians",
+    "non-mva": "Non-MCG: Motor Vehiclle Administration",
+    "hhs-covid": "HHS: Covid Hotline",
+    "hhs-odc": "HHS: Disease Control and Epidemiology",
+    "dot-parking": "DOT: Division of Parking Management",
+    "non-sdat": "Non-MCG: State Department of Assesments and Taxation",
+    "non-sha": "Non-MCG: MDOT State Highway Administration:",
+}
+
+const commonXfersDropdown = document.getElementById('common-xfers-subject');
+
+fillDropdownList(xferDepartments, commonXfersDropdown);
+
+const commonXferCopyBtn = document.getElementById('common-xfers-copy-btn');
+
+commonXferCopyBtn.addEventListener("click", function () {
+    const notes = `Caller trying to reach ${xferDepartments[commonXfersDropdown.value]}. Provided ${xferPhoneNums[commonXfersDropdown.value]} and tranfered.`
+    copyNotes(notes);
+});

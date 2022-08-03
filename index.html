@@ -263,7 +263,42 @@
                             </div>
 
                             <div class="col-2 border-end  d-flex justify-content-center align-items-center">
-                                <button id="common-calls-copt-btn" type="button" class="btn btn-primary">
+                                <button id="common-calls-copy-btn" type="button" class="btn btn-primary">
+                                    <i class="bi bi-clipboard me-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMON XFERS -->
+    <section class="row justify-content-center" id="common-xfers">
+        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="common-xfers-accordian">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="common-xfers-heading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="common-xfers-body" aria-expanded="true" aria-controls="common-xfers-body">
+                        Common Transfers
+                    </button>
+                </h2>
+                <div id="common-xfers-body" class="accordion-collapse collapse show"
+                    aria-labelledby="common-xfers-heading" data-bs-parent="common-xfers-accordian">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-10">
+                                <label for="common-xfers-subject" class="form-label">Subject</label>
+                                <div class="mb-4 input-group">
+
+                                    <select class="form-select" id="common-xfers-subject" >
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-2 border-end  d-flex justify-content-center align-items-center">
+                                <button id="common-xfers-copy-btn" type="button" class="btn btn-primary">
                                     <i class="bi bi-clipboard me-1"></i></button>
                             </div>
                         </div>
@@ -273,7 +308,7 @@
         </div>
     </section>
     
-    <!-- NOTES COPIED TOAST -->
+    <!-- "NOTES COPIED" TOAST -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-body">
