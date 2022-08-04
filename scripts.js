@@ -6,9 +6,17 @@ function showToast(){
     $('.toast').toast('show');
 }
 
+const lastNotesDisplay = document.getElementById('last-notes-display');
+
+
+function updateDisplay(newText){
+    $(lastNotesDisplay).text(newText);
+}
+
 function copyNotes(notes) {
     if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
         showToast();
+        updateDisplay(notes)
         return navigator.clipboard.writeText(notes);
     }
         
@@ -699,3 +707,5 @@ commonXferCopyBtn.addEventListener("click", function () {
     const notes = `Caller trying to reach ${xferDepartments[commonXfersDropdown.value]}. Provided ${xferPhoneNums[commonXfersDropdown.value]} and tranfered.`
     copyNotes(notes);
 });
+
+
