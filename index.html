@@ -22,7 +22,7 @@
 
     <!-- BUS ARRIVAL SECTION -->
     <section class="row justify-content-center" id="ride-on-arrival">
-        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="ride-on-arrival-accordian">
+        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="main-accordian">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="ride-on-arrival-heading">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -32,7 +32,7 @@
                     </button>
                 </h2>
                 <div id="ride-on-arrival-body" class="accordion-collapse collapse show"
-                    aria-labelledby="ride-on-arrival-heading" data-bs-parent="#ride-on-arrival-accordian">
+                    aria-labelledby="ride-on-arrival-heading" data-bs-parent="#main-accordian">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-4">
@@ -64,23 +64,18 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-
-    <!-- DPS INSPECTION SCHEDULING -->
-    <section class="row justify-content-center" id="inspection-scheduler">
-        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="inspection-scheduler-accordian">
+            <!-- DPS INSPECTION SCHEDULING -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="inspection-scheduler-heading">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#inspection-scheduler-body" aria-expanded="true"
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#inspection-scheduler-body" aria-expanded="false"
                         aria-controls="inspection-scheduler-body">
                         DPS Inspection
                     </button>
                 </h2>
-                <div id="inspection-scheduler-body" class="accordion-collapse collapse show"
-                    aria-labelledby="inspection-scheduler-heading" data-bs-parent="#inspection-scheduler-accordian">
+                <div id="inspection-scheduler-body" class="accordion-collapse collapse "
+                    aria-labelledby="inspection-scheduler-heading" data-bs-parent="#main-accordian">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-3">
@@ -118,22 +113,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-
-    <!-- LOST & FOUND / DEPOT LOCATOR -->
-    <section class="row justify-content-center" id="lost-and-found">
-        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="lost-and-found-accordian">
+            <!-- LOST & FOUND / DEPOT LOCATOR -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="lost-and-found-heading">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#lost-and-found-body" aria-expanded="true" aria-controls="lost-and-found-body">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#lost-and-found-body" aria-expanded="false" aria-controls="lost-and-found-body">
                         Lost & Found / Depot Locator
                     </button>
                 </h2>
-                <div id="lost-and-found-body" class="accordion-collapse collapse show"
-                    aria-labelledby="lost-and-found-heading" data-bs-parent="#lost-and-found-accordian">
+                <div id="lost-and-found-body" class="accordion-collapse collapse"
+                    aria-labelledby="lost-and-found-heading" data-bs-parent="#main-accordian">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-3">
@@ -168,22 +158,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-
-    <!-- RIDE ON STOD ID LOCATOR -->
-    <section class="row justify-content-center" id="stop-id">
-        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="stop-id-accordian">
+            <!-- RIDE ON STOD ID LOCATOR -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="stop-id-heading">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#stop-id-body" aria-expanded="true" aria-controls="stop-id-body">
                         Stop ID Locator
                     </button>
                 </h2>
-                <div id="stop-id-body" class="accordion-collapse collapse show" aria-labelledby="stop-id-heading"
-                    data-bs-parent="#stop-id-accordian">
+                <div id="stop-id-body" class="accordion-collapse collapse" aria-labelledby="stop-id-heading"
+                    data-bs-parent="#main-accordian">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-3">
@@ -191,22 +176,6 @@
                                 <div class="mb-4 input-group">
 
                                     <select class="form-select" id="stop-id-stations" >
-                                        <!-- <option value="bethesda" >Bethesda</option>
-                                        <option value="forest_glen">Forest Glen</option>
-                                        <option value="friendship_heights">Friendship Heights</option>
-                                        <option value="germantown" >Germantown</option>
-                                        <option value="glenmont">Glenmont</option>
-                                        <option value="grosvenor">Grosvenor</option>
-                                        <option value="lakeforest" >Lakeforest</option>
-                                        <option value="medical_center">Medical Center</option>
-                                        <option value="montgomery_mall">Montgomery Mall</option>
-                                        <option value="rockville" >Rockville</option>
-                                        <option value="shady_grove">Shady Grove</option>
-                                        <option value="silver_spring">Silver Spring</option>
-                                        <option value="twinbrook">Twinbrook</option>
-                                        <option value="wheaton" >Wheaton</option>
-                                        <option value="white_flint">White Flint</option> -->
-
                                     </select>
                                 </div>
                             </div>
@@ -235,21 +204,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- COMMON CALL NOTES -->
-    <section class="row justify-content-center" id="common-calls">
-        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="common-calls-accordian">
+            <!-- COMMON CALL NOTES -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="common-calls-heading">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="common-calls-body" aria-expanded="true" aria-controls="common-calls-body">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#common-calls-body" aria-expanded="true" aria-controls="common-calls-body">
                         Common Call Notes
                     </button>
                 </h2>
-                <div id="common-calls-body" class="accordion-collapse collapse show"
-                    aria-labelledby="common-calls-heading" data-bs-parent="common-calls-accordian">
+                <div id="common-calls-body" class="accordion-collapse collapse "
+                    aria-labelledby="common-calls-heading" data-bs-parent="#main-accordian">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-10">
@@ -270,21 +235,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- COMMON XFERS -->
-    <section class="row justify-content-center" id="common-xfers">
-        <div class="accordion col-md-10 col-lg-8 col-xl-6" id="common-xfers-accordian">
+            <!-- COMMON XFERS -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="common-xfers-heading">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="common-xfers-body" aria-expanded="true" aria-controls="common-xfers-body">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#common-xfers-body" aria-expanded="true" aria-controls="common-xfers-body">
                         Common Transfers
                     </button>
                 </h2>
-                <div id="common-xfers-body" class="accordion-collapse collapse show"
-                    aria-labelledby="common-xfers-heading" data-bs-parent="common-xfers-accordian">
+                <div id="common-xfers-body" class="accordion-collapse collapse"
+                    aria-labelledby="common-xfers-heading" data-bs-parent="#main-accordian">
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-10">
