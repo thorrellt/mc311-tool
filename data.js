@@ -1,7 +1,7 @@
 /******************************* 
  * LOST & FOUND / DEPOT LOCATOR 
  *******************************/
-const lafDepotsByRoutes = {
+const lafRoutes = {
     1: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
     2: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
     3: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
@@ -87,8 +87,8 @@ const lafDepotsByRoutes = {
     301: { weekday: 'N/A', saturday: 'N/A', sunday: 'N/A' },
     flex: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
 }
-const lafDepotPhoneNums = {
-    Gaithersburg: `240.777.5925`,
+const lafDepots = {
+    'Gaithersburg': `240.777.5925`,
     'Nicholson Court': `240.777.5910`,
     'Silver Spring': `240.777.5960`,
 }
@@ -159,4 +159,4 @@ const xferData =
                 phone: "301-279-8000"}
 }
 
-export {lafDepotsByRoutes, lafDepotPhoneNums, commonCallData,xferData}
+export {lafRoutes, lafDepots, commonCallData,xferData}

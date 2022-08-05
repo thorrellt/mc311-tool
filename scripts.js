@@ -1,4 +1,4 @@
-import {lafDepotsByRoutes, lafDepotPhoneNums, commonCallData,xferData} from './data.js';
+import {lafRoutes, lafDepots, commonCallData,xferData} from './data.js';
 console.log(xferData);
 function clearList(listName) {
     $("#" + listName).empty();
@@ -118,47 +118,36 @@ function copyInspectionNotes() {
 /****************************** 
  * LOST & FOUND / DEPOT LOCATOR 
  ******************************/
-const dayDropdown = document.getElementById('lost-and-found-day');
-let selectedDay = dayDropdown.value;
+const lafDropdown = document.getElementById('lost-and-found-day');
+const lafRouteNum = document.getElementById("lost-and-found-route-number");
+
 let depot = ''
 
-function updateSelectedDay() {
-    selectedDay = dayDropdown.value;
-    console.log(selectedDay);
-}
-
-function updateDayDropdown() {
-    $("#lost-and-found-day:first-child").html(selectedDay + ' <span class="caret"></span>');
-}
 
 function updateDepot() {
     //get selected route #    
-    const routeNumber = document.getElementById("lost-and-found-route-number").value;
+    const currentRoute = lafRouteNum.value;
 
     //update depot variable
-    if (!lafDepotsByRoutes[routeNumber]) {
+    if (!lafRoutes[currentRoute]) {
         depot = `Route Not Found`;
     } else {
-        depot = lafDepotsByRoutes[routeNumber][selectedDay];
+        depot = lafRoutes[currentRoute][lafDropdown.value];
     }
 
-    // //update the DOM
-    // updateDayDropdown();
+    //update the DOM
     $("#depot-name").html(depot);
 }
 
-// Make Dropdown text match Selection
-dayDropdown.addEventListener('change', () => {
-    updateSelectedDay();
-    updateDepot();
-});
+// Make Depot Display text match Selection
+lafDropdown.addEventListener('change', updateDepot);
 
 
 // Update Depot name on change
 $(".dropdown-menu li button").click(updateDepot);
 $("#lost-and-found-route-number").change(updateDepot);
 
-function copyLostAndFoundNotes() {
+function generateLafNotes(){
     //get selected route #    
     const routeNumber = document.getElementById("lost-and-found-route-number").value;
 
@@ -174,10 +163,15 @@ function copyLostAndFoundNotes() {
             break;
 
         default:
-            notes = `Calling about an item lost on the ${routeNumber}. I provided ${lafdepotPhoneNums[depot]} to contact the ${depot} bus depot.`;
+            notes = `Calling about an item lost on the ${routeNumber}. I provided ${lafDepots[depot]} to contact the ${depot} bus depot.`;
     }
-    copyNotes(notes)
-};
+    return notes;
+}
+
+const lostAndFoundCopyBtn = document.getElementById('lost-and-found-copy-btn');
+lostAndFoundCopyBtn.addEventListener("click", () =>{
+    copyNotes(generateLafNotes()) 
+});
 
 
 
@@ -517,8 +511,7 @@ arrivalCopyBtn.addEventListener("click", copyArrivalTimeNotes);
 const schedulerCopyBtn = document.getElementById('inspection-scheduler-copy-btn');
 schedulerCopyBtn.addEventListener("click", copyInspectionNotes);
 
-const lostAndFoundCopyBtn = document.getElementById('lost-and-found-copy-btn');
-lostAndFoundCopyBtn.addEventListener("click", copyLostAndFoundNotes);
+
 
 const stopIdCopyBtn = document.getElementById('stop-id-copy-btn');
 stopIdCopyBtn.addEventListener("click", function () {
