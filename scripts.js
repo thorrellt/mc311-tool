@@ -1,3 +1,5 @@
+import {lafDepotsByRoutes, lafDepotPhoneNums, xferData} from './data.js';
+console.log(xferData);
 function clearList(listName) {
     $("#" + listName).empty();
 }
@@ -34,6 +36,8 @@ function fillDropdownList(listObject, listElement) {
         listElement.add(option);
     }
 }
+
+
 
 
 
@@ -114,100 +118,6 @@ const dayDropdown = document.getElementById('lost-and-found-day');
 let selectedDay = dayDropdown.value;
 let depot = ''
 
-//Collection of Depots for Bus routes
-const depotsByRoutes = {
-    1: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    2: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    3: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    4: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    5: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Nicholson Court' },
-    6: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    7: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    8: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'N/A' },
-    9: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    10: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    11: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    12: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    13: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    14: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'N/A' },
-    15: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    16: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    17: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    18: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    19: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    20: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    21: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    22: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    23: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'N/A' },
-    24: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    25: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    26: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    28: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'N/A' },
-    29: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'Nicholson Court' },
-    30: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    31: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    32: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    33: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    34: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    36: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    37: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    38: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'Nicholson Court' },
-    39: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    41: { weekday: 'Silver Spring', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    42: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'N/A' },
-    43: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    44: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    45: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'N/A' },
-    46: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    47: { weekday: 'Silver Spring', saturday: 'Nicholson Court', sunday: 'Nicholson Court' },
-    48: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    49: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    51: { weekday: 'Silver Spring', saturday: 'N/A', sunday: 'N/A' },
-    52: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    53: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    54: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    55: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    56: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    57: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    58: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    59: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    60: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    61: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    63: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    64: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Gaithersburg' },
-    65: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    66: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    67: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    70: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    71: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    73: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    74: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    75: { weekday: 'Gaithersburg', saturday: 'Nicholson Court', sunday: 'Nicholson Court' },
-    76: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    78: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    79: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    81: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    83: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'N/A' },
-    90: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    93: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    94: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    96: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-    97: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'Nicholson Court' },
-    98: { weekday: 'Nicholson Court', saturday: 'Nicholson Court', sunday: 'N/A' },
-    100: { weekday: 'Gaithersburg', saturday: 'Gaithersburg', sunday: 'Nicholson Court' },
-    101: { weekday: 'Gaithersburg', saturday: 'N/A', sunday: 'N/A' },
-    L8: { weekday: 'N/A', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    T2: { weekday: 'N/A', saturday: 'Silver Spring', sunday: 'Silver Spring' },
-    301: { weekday: 'N/A', saturday: 'N/A', sunday: 'N/A' },
-    flex: { weekday: 'Nicholson Court', saturday: 'N/A', sunday: 'N/A' },
-}
-
-const depotPhoneNumbers = {
-    Gaithersburg: `240.777.5925`,
-    'Nicholson Court': `240.777.5910`,
-    'Silver Spring': `240.777.5960`,
-}
-
 function updateSelectedDay() {
     selectedDay = dayDropdown.value;
     console.log(selectedDay);
@@ -222,10 +132,10 @@ function updateDepot() {
     const routeNumber = document.getElementById("lost-and-found-route-number").value;
 
     //update depot variable
-    if (!depotsByRoutes[routeNumber]) {
+    if (!lafDepotsByRoutes[routeNumber]) {
         depot = `Route Not Found`;
     } else {
-        depot = depotsByRoutes[routeNumber][selectedDay];
+        depot = lafDepotsByRoutes[routeNumber][selectedDay];
     }
 
     // //update the DOM
@@ -260,7 +170,7 @@ function copyLostAndFoundNotes() {
             break;
 
         default:
-            notes = `Calling about an item lost on the ${routeNumber}. I provided ${depotPhoneNumbers[depot]} to contact the ${depot} bus depot.`;
+            notes = `Calling about an item lost on the ${routeNumber}. I provided ${lafdepotPhoneNums[depot]} to contact the ${depot} bus depot.`;
     }
     copyNotes(notes)
 };
@@ -677,34 +587,54 @@ const xferPhoneNums = {
     "dot-parking": "7-8740",
     "non-sdat": "888-246-5941",
     "non-sha": "301-513-7300",
+    "pol-pol": "301-279-8000"
 }
 
-const xferDepartments =
+const xfersDepartments =
 {
-    "boe-boe": "BOE: Board of Elections",
+    "boe-boe": "Board of Elections",
     "dot-highway": "DOT: Highway Services",
     "dot-engineering": "DOT: Traffic Engineering",
     "fin-payments": "FIN: Pay by Phone",
     "fin-payroll": "FIN: Payroll",
     "hhs-lar": "HHS: Licensure and Regulatory",
     "hhs-oess": "HHS: Office of Eligibilty and Support Services",
-    "non-boe": "Non-MCG: Maryland State Board of Electricians",
-    "non-mva": "Non-MCG: Motor Vehiclle Administration",
+    "non-boe": "Maryland State Board of Electricians",
+    "non-mva": "Motor Vehicle Administration",
     "hhs-covid": "HHS: Covid Hotline",
     "hhs-odc": "HHS: Disease Control and Epidemiology",
     "dot-parking": "DOT: Division of Parking Management",
-    "non-sdat": "Non-MCG: State Department of Assesments and Taxation",
-    "non-sha": "Non-MCG: MDOT State Highway Administration:",
+    "non-sdat": "State Department of Assesments and Taxation",
+    "non-sha": "MDOT State Highway Administration:",
+    "pol-pol": "Police: Non-Emergency"
 }
 
-const commonXfersDropdown = document.getElementById('common-xfers-subject');
+const xfersDropdown = document.getElementById('common-xfers-subject');
 
-fillDropdownList(xferDepartments, commonXfersDropdown);
+function fillDropdownList2(values, entries, listElement) {
+    for (let i = 0; i < entries.length; i++) {
+        let option = document.createElement('option');
+        option.value = values[i];
+        option.text = entries[i];
+        listElement.add(option);
+    }
+}
 
-const commonXferCopyBtn = document.getElementById('common-xfers-copy-btn');
+const xferValues = Object.keys(xferData);
+const xferEntries = Object.values(xferData).map(item => {
+    return item.name
+});
+console.table(xferEntries);
+fillDropdownList2(xferValues, xferEntries, xfersDropdown);
 
-commonXferCopyBtn.addEventListener("click", function () {
-    const notes = `Caller trying to reach ${xferDepartments[commonXfersDropdown.value]}. Provided ${xferPhoneNums[commonXfersDropdown.value]} and tranfered.`
+const xferCopyBtn = document.getElementById('common-xfers-copy-btn');
+
+function generateXferNotes(){
+    return `Caller trying to reach ${xfersDepartments[xfersDropdown.value]}. Provided ${xferPhoneNums[xfersDropdown.value]} and transferred.`
+}
+
+xferCopyBtn.addEventListener("click", function () {
+    const notes = `Caller trying to reach ${xfersDepartments[xfersDropdown.value]}. Provided ${xferPhoneNums[xfersDropdown.value]} and transferred.`
     copyNotes(notes);
 });
 
