@@ -1,4 +1,4 @@
-import {lafDepotsByRoutes, lafDepotPhoneNums, xferData} from './data.js';
+import {lafDepotsByRoutes, lafDepotPhoneNums, commonCallData,xferData} from './data.js';
 console.log(xferData);
 function clearList(listName) {
     $("#" + listName).empty();
@@ -37,10 +37,14 @@ function fillDropdownList(listObject, listElement) {
     }
 }
 
-
-
-
-
+function fillDropdownList2(values, entries, listElement) {
+    for (let i = 0; i < entries.length; i++) {
+        let option = document.createElement('option');
+        option.value = values[i];
+        option.text = entries[i];
+        listElement.add(option);
+    }
+}
 
 /*****************
  * RIDE ON ARRIVAL
@@ -525,117 +529,45 @@ stopIdCopyBtn.addEventListener("click", function () {
 /******************** 
  * COMMON CALL NOTES
  ********************/
+const commonCallValues = Object.keys(commonCallData);
+const commonCallEntries = Object.values(commonCallData).map(item => {
+    return item.subject
+});
 
-const commonCallSubjects = {
-    'disc-rep': "Disconnect-Rep initiated (No response)",
-    'disc-caller': "Disconnect-Caller initiated",
-    'sw-slide': "Solid Waste-Slide Week",
-    'sw-no-trash': "Solid Waste-No County Trash Service",
-    'sw-station': "Solid Waste-Transfer Station Info",
-    'rrp-apply': "RRP-How to apply",
-    'rrp-status': "RRP-How to check status",
-}
+const commonCallDropdown = document.getElementById('common-calls-subject');
 
-const commonCallNotes = {
-    'disc-rep': "Caller stopped responding. Read no response disclose and disconnected call",
-    'disc-caller': "Caller stopped responding, then call dropped.",
-    'sw-slide': "Advised of 1 day slide this week due to Holiday.",
-    'sw-no-trash': "Advised we do not provide trash to this address and to reach out to private collector.",
-    'sw-station': "Gave info about Transfer Station Including:\n" +
-    "Hours: M-Sa 7am-5pm & Su 9am-5pm\n" +
-    "Cost: 500lbs free then $60/ton\n" +
-    "Location: 16101 Frederick Rd, Derwood, MD 20855",
-    'rrp-apply': "Gave info about applying for RRP including:\n" +
-    "Where to apply online.\n" +
-    "What non-profits can help apply.\n" +
-    "Emailed KBA to apply.",
-    'rrp-status': "Advised RRP status can be checked by logging into RRP portal or emailing HHS@montgomerycountymd.gov.",
-}
+fillDropdownList2(commonCallValues, commonCallEntries, commonCallDropdown);
 
-
-const commonCallsDropdown = document.getElementById('common-calls-subject');
-
-fillDropdownList(commonCallSubjects, commonCallsDropdown);
-
-function currentSubjectNotes(){
-    return commonCallNotes[commonCallsDropdown.value];
+function generateCommonCallNotes(){
+    return commonCallData[commonCallDropdown.value].notes;
 }
 
 const commonCallCopyBtn = document.getElementById('common-calls-copy-btn');
 
 commonCallCopyBtn.addEventListener("click", function () {
-    copyNotes(currentSubjectNotes());
+    copyNotes(generateCommonCallNotes());
 });
 
 
 /************************ 
  * COMMON TRANSFER NOTES
  ************************/
-
-const xferPhoneNums = {
-    "boe-boe": "7-8683",
-    "dot-highway": "7-7623",
-    "dot-engineering": "7-2190",
-    "fin-payments": "7-8898",
-    "fin-payroll": "7-8840",
-    "hhs-lar": "7-3986",
-    "hhs-oess": "7-1003",
-    "non-boe": "410-230-6163",
-    "non-mva": "800-950-1682",
-    "hhs-covid": "7-2982",
-    "hhs-odc": "7-1755",
-    "dot-parking": "7-8740",
-    "non-sdat": "888-246-5941",
-    "non-sha": "301-513-7300",
-    "pol-pol": "301-279-8000"
-}
-
-const xfersDepartments =
-{
-    "boe-boe": "Board of Elections",
-    "dot-highway": "DOT: Highway Services",
-    "dot-engineering": "DOT: Traffic Engineering",
-    "fin-payments": "FIN: Pay by Phone",
-    "fin-payroll": "FIN: Payroll",
-    "hhs-lar": "HHS: Licensure and Regulatory",
-    "hhs-oess": "HHS: Office of Eligibilty and Support Services",
-    "non-boe": "Maryland State Board of Electricians",
-    "non-mva": "Motor Vehicle Administration",
-    "hhs-covid": "HHS: Covid Hotline",
-    "hhs-odc": "HHS: Disease Control and Epidemiology",
-    "dot-parking": "DOT: Division of Parking Management",
-    "non-sdat": "State Department of Assesments and Taxation",
-    "non-sha": "MDOT State Highway Administration:",
-    "pol-pol": "Police: Non-Emergency"
-}
-
 const xfersDropdown = document.getElementById('common-xfers-subject');
-
-function fillDropdownList2(values, entries, listElement) {
-    for (let i = 0; i < entries.length; i++) {
-        let option = document.createElement('option');
-        option.value = values[i];
-        option.text = entries[i];
-        listElement.add(option);
-    }
-}
 
 const xferValues = Object.keys(xferData);
 const xferEntries = Object.values(xferData).map(item => {
     return item.name
 });
-console.table(xferEntries);
+
 fillDropdownList2(xferValues, xferEntries, xfersDropdown);
 
 const xferCopyBtn = document.getElementById('common-xfers-copy-btn');
 
 function generateXferNotes(){
-    return `Caller trying to reach ${xfersDepartments[xfersDropdown.value]}. Provided ${xferPhoneNums[xfersDropdown.value]} and transferred.`
+    return `Caller trying to reach ${xferData[xfersDropdown.value].name}. Provided ${xferData[xfersDropdown.value].phone} and transferred.`
 }
-
 xferCopyBtn.addEventListener("click", function () {
-    const notes = `Caller trying to reach ${xfersDepartments[xfersDropdown.value]}. Provided ${xferPhoneNums[xfersDropdown.value]} and transferred.`
-    copyNotes(notes);
+    copyNotes(generateXferNotes());
 });
 
 
