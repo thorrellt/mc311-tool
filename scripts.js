@@ -37,12 +37,24 @@ function fillDropdownList(listObject, listElement) {
     }
 }
 
+function sortObjectByKeys(o) {
+    return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
+}
+
+function generateDropdownListObj(values, entries){
+    let listObj = {};
+    entries.forEach((entry, i) => listObj[entry] = values[i]);
+    return sortObjectByKeys(listObj)
+}
+
 function fillDropdownList2(values, entries, listElement) {
-    for (let i = 0; i < entries.length; i++) {
+    const listObj = generateDropdownListObj(values, entries)
+    for(const entry in listObj){
         let option = document.createElement('option');
-        option.value = values[i];
-        option.text = entries[i];
+        option.value = listObj[entry];
+        option.text = entry;
         listElement.add(option);
+
     }
 }
 
