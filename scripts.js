@@ -46,6 +46,7 @@ function fillDropdownList2(values, entries, listElement) {
     }
 }
 
+
 /*****************
  * RIDE ON ARRIVAL
  *****************/

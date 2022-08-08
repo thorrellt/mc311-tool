@@ -3,17 +3,50 @@
         <a class="navbar-brand" href="#">
             <img src="./MC311_Icon.png" id="311Icon" alt="" height="50" class="d-inline-block align-text-center">
             MC311 Note Tool
-          </a>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
-                <a class="nav-link" href="./behind-the-code.html">Behind the Code</a>
-                <a class="nav-link" href="./author.html">About the Author</a>
+                <a id="nav--home" class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                <a id="nav--btc" class="nav-link" href="./behind-the-code.html">Behind the Code</a>
+                <a id="nav--author" class="nav-link" href="./author.html">About the Author</a>
             </div>
         </div>
     </div>
 </nav>
+
+<script>
+    function navHome() {
+        document.getElementById("nav--home").classList.add("active");
+        document.getElementById("nav--btc").classList.remove("active");
+        document.getElementById("nav--author").classList.remove("active");
+    }
+    function navBTC() {
+        document.getElementById("nav--home").classList.remove("active");
+        document.getElementById("nav--btc").classList.add("active");
+        document.getElementById("nav--author").classList.remove("active");
+    }
+    function navAuthor() {
+        document.getElementById("nav--home").classList.remove("active");
+        document.getElementById("nav--btc").classList.remove("active");
+        document.getElementById("nav--author").classList.add("active");
+    }
+
+    let page = window.location.pathname.split("/").pop();
+    console.log(page);
+
+    switch (page) {
+        case "index.html":
+            navHome()
+            break;
+        case "behind-the-code.html":
+            navBTC()
+            break;
+        case "author.html":
+            navAuthor()
+            break;
+    }
+</script>
