@@ -1,5 +1,5 @@
 import { lafRoutes, lafDepots, commonCallData, xferData, stopIdData } from './data.js';
-console.log(xferData);
+
 function clearList(listName) {
     $("#" + listName).empty();
 }
@@ -25,9 +25,8 @@ function copyNotes(notes) {
     return Promise.reject('The Clipboard API is not available.');
 }
 
-
-function sortObjectByKeys(o) {
-    return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
+function sortObjectByKeys(obj) {
+    return Object.keys(obj).sort().reduce((r, k) => (r[k] = obj[k], r), {});
 }
 
 function generateDropdownListObj(values, entries){
@@ -36,7 +35,7 @@ function generateDropdownListObj(values, entries){
     return sortObjectByKeys(listObj)
 }
 
-function fillDropdownList2(values, entries, listElement) {
+function fillDropdownList(values, entries, listElement) {
     const listObj = generateDropdownListObj(values, entries)
     for(const entry in listObj){
         let option = document.createElement('option');
@@ -51,7 +50,8 @@ function fillDropdownList2(values, entries, listElement) {
 /*****************
  * RIDE ON ARRIVAL
  *****************/
-function copyArrivalTimeNotes() {
+// Generate & Copy Notes
+function generateArrivalNotes() {
     //Gather User Inputs
     const stopID = document.getElementById("ride-on-arrival-id").value;
     const route = document.getElementById("ride-on-arrival-route").value;
@@ -67,8 +67,13 @@ function copyArrivalTimeNotes() {
     } else {
         notes += `Advised ${minutes} minutes.`
     }
-    copyNotes(notes);
+    return notes
 };
+
+const arrivalCopyBtn = document.getElementById('ride-on-arrival-copy-btn');
+arrivalCopyBtn.addEventListener("click", () =>{
+    copyNotes(generateArrivalNotes())
+});
 
 
 /****************
@@ -83,7 +88,8 @@ Date.prototype.nextBusDay = function () {
     }
 }
 
-function copyInspectionNotes() {
+// Generate & Copy Notes
+function generateInspectionNotes() {
     //Gather User Inputs
     const permitType = document.getElementById("inspection-scheduler-permit-type").value;
     const permitNumber = document.getElementById("inspection-scheduler-permit-number").value;
@@ -112,9 +118,14 @@ function copyInspectionNotes() {
         notes += `inspection for ${scheduledDate.toLocaleDateString()}. `;
     }
 
-    copyNotes(notes);
-
+    return notes;
 }
+
+const schedulerCopyBtn = document.getElementById('inspection-scheduler-copy-btn');
+schedulerCopyBtn.addEventListener("click", () =>{
+    copyNotes(generateInspectionNotes())
+});
+
 
 
 /****************************** 
@@ -122,42 +133,36 @@ function copyInspectionNotes() {
  ******************************/
 const lafDropdown = document.getElementById('lost-and-found-day');
 const lafRouteNum = document.getElementById("lost-and-found-route-number");
+let currentDepot = ''
 
-let depot = ''
-
-
-function updateDepot() {
+// Update Depot Name Display on change
+function updateDepotDisplay() {
     //get selected route #    
     const currentRoute = lafRouteNum.value;
 
     //update depot variable
     if (!lafRoutes[currentRoute]) {
-        depot = `Route Not Found`;
+        currentDepot = `Route Not Found`;
     } else {
-        depot = lafRoutes[currentRoute][lafDropdown.value];
+        currentDepot = lafRoutes[currentRoute][lafDropdown.value];
     }
 
     //update the DOM
-    $("#depot-name").html(depot);
+    $("#depot-name").html(currentDepot);
 }
+lafDropdown.addEventListener('change', updateDepotDisplay);
+lafRouteNum.addEventListener('change', updateDepotDisplay);
 
-// Make Depot Display text match Selection
-lafDropdown.addEventListener('change', updateDepot);
 
-
-// Update Depot name on change
-$(".dropdown-menu li button").click(updateDepot);
-$("#lost-and-found-route-number").change(updateDepot);
-
-function generateLafNotes(){
-    //get selected route #    
-    const routeNumber = document.getElementById("lost-and-found-route-number").value;
+// Generate & Copy Notes
+function generateLafNotes(){    
+    const selectedRouteNum = document.getElementById("lost-and-found-route-number").value;
 
     //Build String for output
-    let notes = ``
-    switch (depot) {
+    let notes;
+    switch (currentDepot) {
         case 'Route Not Found':
-            notes = depot;
+            notes = currentDepot;
             break;
 
         case 'N/A':
@@ -165,7 +170,7 @@ function generateLafNotes(){
             break;
 
         default:
-            notes = `Calling about an item lost on the ${routeNumber}. I provided ${lafDepots[depot]} to contact the ${depot} bus depot.`;
+            notes = `Calling about an item lost on the ${selectedRouteNum}. I provided ${lafDepots[currentDepot]} to contact the ${currentDepot} bus depot.`;
     }
     return notes;
 }
@@ -177,348 +182,48 @@ lostAndFoundCopyBtn.addEventListener("click", () =>{
 
 
 
-
 /****************** 
  * COMMON STOP IDs
  ******************/
-const routesByIdsByStation = {
-    'bethesda': {
-        20300: ['34'],
-        20306: ['29', '32', '36'],
-        20308: ['29', '30', '32', '36', '47', '70'],
-    },
-    'forest_glen': {
-        15272: ['8'],
-        15276: ['7'],
-    },
-    'friendship_heights': {
-        22700: ['1', '11', '34'],
-        14769: ['23', '29'],
-        27356: ['34'],
-    },
-    'germantown': {
-        15182: ['55', '61', '74', '75', '97', '98', '100'],
-        15012: ['83'],
-    },
-    'glenmont': {
-        29180: ['33', '55'],
-        29184: ['26', '39', '41'],
-        29182: ['26', '31', '39', '41', '49', '51', '53'],
-        29190: ['10'],
-        29192: ['51'],
-    },
-    'grosvenor': {
-        23164: ['96'],
-        27730: ['46'],
-        15298: ['6', '37'],
-    },
-    'lakeforest': {
-        30010: ['101'],
-        23722: ['54', '55', '56', '57', '58', '59', '61'],
-    },
-    'medical_center': {
-        24006: ['33'],
-        24008: ['34', '46'],
-        24010: ['30', '70', '101'],
-    },
-    'montgomery mall': {
-        17620: ['6', '96'],
-        17621: ['26'],
-        17626: ['42'],
-        17624: ['47'],
-    },
-    'rockville': {
-        25654: ['46'],
-        28216: ['48', '49'],
-        14775: ['55'],
-        25650: ['59'],
-        25656: ['101'],
-        25652: ['45', '52'],
-        25660: ['54', '56', '63'],
-        25662: ['44', '47', '81'],
-    },
-    'shady_grove': {
-        14776: ['55', '57', '59', '63', '66', '67'],
-        14601: ['43', '53', '58', '60', '61', '64', '65', '71', '73', '74', '76', '78', '79', '90', '101'],
-        26012: ['101'],
-        26006: ['43'],
-    },
-    'silver_spring': {
-        17479: ['28'],
-        17609: ['1', '11'],
-        17607: ['2'],
-        17604: ['16'],
-        17480: ['8', '9'],
-        17481: ['21', '22'],
-        17605: ['12', '13'],
-        17484: ['15', '19'],
-        17485: ['18'],
-        17486: ['20'],
-        17487: ['14', '17'],
-        17490: ['4', '5'],
-    },
-    'twinbrook': {
-        26586: ['46'],
-        28424: ['10', '45'],
-        26588: ['5'],
-        26580: ['10', '26'],
-        26582: ['44']
-    },
-    'wheaton': {
-        29740: ['31', '38'],
-        15416: ['9'],
-        27186: ['34'],
-    },
-    'white_flint': {
-        25542: ['5', '26', '42', '46', '81', '101'],
-        25610: ['5', '26', '46', '81', '101'],
-    },
-}
-const IdsByRoutesByStation = {
-    'bethesda': {
-        29: ['20306', '20308'],
-        30: ['20308'],
-        32: ['20306', '20308'],
-        34: ['20300'],
-        36: ['20306', '20308'],
-        47: ['20308'],
-        70: ['20308'],
-    },
-    'forest_glen': {
-        7: ['15276'],
-        8: ['15272'],
-    },
-    'friendship_heights': {
-        1: ['22700'],
-        11: ['22700'],
-        23: ['14769'],
-        29: ['14769'],
-        34: ['22700', '27356'],
-    },
-    'germantown': {
-        55: ['20306', '20308'],
-        61: ['20308'],
-        74: ['20306', '20308'],
-        75: ['20300'],
-        83: ['20306', '20308'],
-        97: ['20308'],
-        98: ['20308'],
-        100: ['20308'],
-    },
-    'glenmont': {
-        10: ['29190'],
-        26: ['29184', '29182'],
-        31: ['29182'],
-        33: ['29180'],
-        39: ['29184', '29182'],
-        41: ['29184', '29182'],
-        51: ['29182', '29190'],
-        53: ['29182'],
-        55: ['29180'],
-    },
-    'grosvenor': {
-        6: ['15298'],
-        37: ['15298'],
-        46: ['27730'],
-        96: ['23164'],
-    },
-    'lakeforest': {
-        54: ['23722'],
-        55: ['23722'],
-        56: ['23722'],
-        57: ['23722'],
-        58: ['23722'],
-        59: ['23722'],
-        61: ['23722'],
-        101: ['30010'],
-    },
-    'medical_center': {
-        30: ['24010'],
-        33: ['24006'],
-        34: ['24008'],
-        46: ['24008'],
-        70: ['24010'],
-        101: ['24010'],
-    },
-    'montgomery_mall': {
-        6: ['17620'],
-        26: ['17621'],
-        42: ['17626'],
-        47: ['17624'],
-        96: ['17620'],
-    },
-    'rockville': {
-        44: ['25662'],
-        45: ['25652'],
-        46: ['25654'],
-        47: ['25662'],
-        48: ['28216'],
-        49: ['28216'],
-        52: ['25652'],
-        54: ['25660'],
-        55: ['14775'],
-        56: ['25660'],
-        59: ['25650'],
-        63: ['25660'],
-        81: ['25662'],
-        101: ['25656'],
-    },
-    'shady_grove': {
-        43: ['14601', '26006'],
-        53: ['14601'],
-        55: ['14776'],
-        57: ['14776'],
-        58: ['14601'],
-        59: ['14776'],
-        60: ['14601'],
-        61: ['14601'],
-        63: ['14776'],
-        64: ['14601'],
-        65: ['14601'],
-        66: ['14776'],
-        67: ['14776'],
-        71: ['14601'],
-        73: ['14601'],
-        74: ['14601'],
-        76: ['14601'],
-        78: ['14601'],
-        79: ['14601'],
-        90: ['14601'],
-        101: ['14601', '26012'],
-    },
-    'silver_spring': {
-        1: ['17609'],
-        2: ['17607'],
-        4: ['17490'],
-        5: ['17490'],
-        8: ['17480'],
-        9: ['17480'],
-        11: ['17609'],
-        12: ['17605'],
-        13: ['17605'],
-        14: ['17487'],
-        15: ['17484'],
-        16: ['17604'],
-        17: ['17487'],
-        18: ['17485'],
-        19: ['17484'],
-        20: ['17486'],
-        21: ['17481'],
-        22: ['17481'],
-        28: ['17479'],
-    },
-    'twinbrook': {
-        5: ['26588'],
-        10: ['28424', '26580'],
-        26: ['26580'],
-        44: ['26582'],
-        45: ['28424'],
-        46: ['26586'],
-    },
-    'wheaton': {
-        9: ['15416'],
-        31: ['29740'],
-        34: ['27186'],
-        38: ['29740'],
-    },
-    'white_flint': {
-        5: ['25542', '25610'],
-        26: ['25542', '25610'],
-        42: ['25542'],
-        46: ['25542', '25610'],
-        81: ['25542', '25610'],
-        101: ['25542', '25610'],
-    }
-}
-const stationNames = {
-    'bethesda': 'Bethesda',
-    'forest_glen': 'Forest Glen',
-    'friendship_heights': 'Friendship Heights',
-    'germantown"': 'Germantown',
-    'glenmont': 'Glenmont',
-    'grosvenor': 'Grosvenor',
-    'lakeforest': 'Lakeforest',
-    'medical_center': 'Medical Center',
-    'montgomery_mall': 'Montgomery Mall',
-    'rockville': 'Rockville',
-    'shady_grove': 'Shady Grove',
-    'silver_spring': 'Silver Spring',
-    'twinbrook': 'Twinbrook',
-    'wheaton': 'Wheaton',
-    'white_flint': 'White Flint',
-
-}
-
-
-
+// Generate Dropdown
 const stationDropdown = document.getElementById('stop-id-stations');
+const routesDropdown = document.getElementById('stop-id-routes');
 const stationValues = Object.keys(stopIdData);
 const stationEntries = Object.values(stopIdData).map(station => station.name);
-fillDropdownList2(stationValues, stationEntries, stationDropdown)
 
-
-const routesDropdown = document.getElementById('stop-id-routes');
-let selectedStation = stationDropdown.value;
-let selectedRoute = routesDropdown.value;
-let stopID = "";
-
-
+fillDropdownList(stationValues, 
+    stationEntries, 
+    stationDropdown)
 function updateRouteList() {
-    let stopList = Object.keys(IdsByRoutesByStation[selectedStation]);
+    let stopList = Object.keys(stopIdData[stationDropdown.value].routes);
+    fillDropdownList(stopList, stopList, routesDropdown)
+} updateRouteList();
 
-    for (let i = 0; i < stopList.length; i++) {
-        let option = document.createElement('option');
-        option.value = stopList[i];
-        option.text = stopList[i];
-        routesDropdown.add(option);
-    }
-    selectedRoute = routesDropdown.value;
 
-}
+//Update Display/Dropdowns on change
+let stopID = "";
+function updateStopIdDisplay() {
+    stopID = stopIdData[stationDropdown.value].routes[routesDropdown.value][0];
 
-// Make Dropdown text match Selection
-stationDropdown.addEventListener('change', () => {
-    selectedStation = stationDropdown.value;
-    clearList('stop-id-routes');
-    updateRouteList();
-    updateStopID();
-});
-
-routesDropdown.addEventListener('change', () => {
-    selectedRoute = routesDropdown.value;
-    updateStopID();
-});
-
-function updateStopID() {
-    stopID = IdsByRoutesByStation[selectedStation][selectedRoute][0];
-    console.log(selectedRoute);
-    console.log(stopID);
-
-    if (IdsByRoutesByStation[selectedStation][selectedRoute].length > 1) {
-        $("#stop-id-id").html(stopID + " or " + IdsByRoutesByStation[selectedStation][selectedRoute][1])
+    if (stopIdData[stationDropdown.value].routes[routesDropdown.value].length > 1) {
+        $("#stop-id-id").html(stopID + " or " + stopIdData[stationDropdown.value].routes[routesDropdown.value][1])
     } else {
         $("#stop-id-id").html(stopID);
     }
 
-}
+} updateStopIdDisplay();
 
-function copyStopIdNotes() {
-    if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-        return navigator.clipboard.writeText(stopID);
-    return Promise.reject('The Clipboard API is not available.');
-}
-
-updateRouteList();
-updateStopID();
-
-const arrivalCopyBtn = document.getElementById('ride-on-arrival-copy-btn');
-arrivalCopyBtn.addEventListener("click", copyArrivalTimeNotes);
-
-const schedulerCopyBtn = document.getElementById('inspection-scheduler-copy-btn');
-schedulerCopyBtn.addEventListener("click", copyInspectionNotes);
+stationDropdown.addEventListener('change', () => {
+    clearList('stop-id-routes');
+    updateRouteList();
+    updateStopIdDisplay();
+});
+routesDropdown.addEventListener('change', () => {
+    updateStopIdDisplay();
+});
 
 
-
+// Generate & Copy Notes
 const stopIdCopyBtn = document.getElementById('stop-id-copy-btn');
 stopIdCopyBtn.addEventListener("click", function () {
     copyNotes(stopID);
@@ -528,21 +233,23 @@ stopIdCopyBtn.addEventListener("click", function () {
 /******************** 
  * COMMON CALL NOTES
  ********************/
-const commonCallValues = Object.keys(commonCallData);
-const commonCallEntries = Object.values(commonCallData).map(item => {
-    return item.subject
-});
-
+// Generate Dropdown
 const commonCallDropdown = document.getElementById('common-calls-subject');
+const commonCallValues = Object.keys(commonCallData);
+const commonCallEntries = Object.values(commonCallData).map(
+    item =>  item.subject
+    );
+fillDropdownList(commonCallValues, 
+    commonCallEntries, 
+    commonCallDropdown);
 
-fillDropdownList2(commonCallValues, commonCallEntries, commonCallDropdown);
 
+// Generate & Copy Notes
 function generateCommonCallNotes(){
     return commonCallData[commonCallDropdown.value].notes;
 }
 
 const commonCallCopyBtn = document.getElementById('common-calls-copy-btn');
-
 commonCallCopyBtn.addEventListener("click", function () {
     copyNotes(generateCommonCallNotes());
 });
@@ -551,22 +258,23 @@ commonCallCopyBtn.addEventListener("click", function () {
 /************************ 
  * COMMON TRANSFER NOTES
  ************************/
+// Generate Dropdown
 const xfersDropdown = document.getElementById('common-xfers-subject');
-
 const xferValues = Object.keys(xferData);
-const xferEntries = Object.values(xferData).map(item => {
-    return item.name
-});
+const xferEntries = Object.values(xferData).map(
+    item => item.name
+    );
+fillDropdownList(xferValues, 
+    xferEntries, 
+    xfersDropdown);
 
-fillDropdownList2(xferValues, xferEntries, xfersDropdown);
 
-const xferCopyBtn = document.getElementById('common-xfers-copy-btn');
-
+// Generate & Copy Notes
 function generateXferNotes(){
     return `Caller trying to reach ${xferData[xfersDropdown.value].name}. Provided ${xferData[xfersDropdown.value].phone} and transferred.`
 }
+
+const xferCopyBtn = document.getElementById('common-xfers-copy-btn');
 xferCopyBtn.addEventListener("click", function () {
     copyNotes(generateXferNotes());
 });
-
-
