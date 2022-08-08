@@ -1,4 +1,4 @@
-import {lafRoutes, lafDepots, commonCallData,xferData} from './data.js';
+import { lafRoutes, lafDepots, commonCallData, xferData, stopIdData } from './data.js';
 console.log(xferData);
 function clearList(listName) {
     $("#" + listName).empty();
@@ -25,17 +25,6 @@ function copyNotes(notes) {
     return Promise.reject('The Clipboard API is not available.');
 }
 
-function fillDropdownList(listObject, listElement) {
-    const listDisplayText = Object.values(listObject);
-    const listValues = Object.keys(listObject);
-
-    for (let i = 0; i < listDisplayText.length; i++) {
-        let option = document.createElement('option');
-        option.value = listValues[i];
-        option.text = listDisplayText[i];
-        listElement.add(option);
-    }
-}
 
 function sortObjectByKeys(o) {
     return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
@@ -463,7 +452,11 @@ const stationNames = {
 
 
 const stationDropdown = document.getElementById('stop-id-stations');
-fillDropdownList(stationNames, stationDropdown);
+const stationValues = Object.keys(stopIdData);
+const stationEntries = Object.values(stopIdData).map(station => station.name);
+fillDropdownList2(stationValues, stationEntries, stationDropdown)
+
+
 const routesDropdown = document.getElementById('stop-id-routes');
 let selectedStation = stationDropdown.value;
 let selectedRoute = routesDropdown.value;
