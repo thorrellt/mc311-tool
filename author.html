@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,30 +18,62 @@
         $(function () {
             $("#navbar").load("navbar.html");
         });
-    </script> 
+    </script>
 
     <title>MC 311 Tool-About the Author</title>
 </head>
+
 <body>
     <div id="navbar"></div>
-    
-    <h1>About the Author</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique iusto facilis accusantium vel nemo est ad, praesentium, recusandae cum expedita hic laudantium quibusdam illum a! Nam maiores omnis cupiditate reprehenderit eum, illo quia corrupti! Blanditiis nostrum animi ad. Impedit sequi voluptate distinctio sed nostrum blanditiis! Culpa eius voluptatem veniam ut.</p>
-    <p>For more of my work, you can visit my portfolio below.</p>
-    <a href="https://www.thorrellt.com/" target="_blank" rel="noopener noreferrer" alt="My Portfolio" title="www.thorrellt.com" class="portfolioBtn">My Portfolio</a>
 
-    <img src="./profile_pic.png" alt="Thorrell's Profile Picture" />
-    <a href="https://github.com/thorrellt"  class="btn btn-primary" target="_blank" rel="noopener noreferrer" alt="My Github" title="github.com/thorrellt">
-        <i class="bi bi-github"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/thorrellt/"  class="btn btn-primary" target="_blank" rel="noopener noreferrer" alt="My Linkedin" title="linkedin.com/in/thorrellt">
-        <i class="bi bi-linkedin"></i>
-    </a>
-    <a href="mailto:thorrellt@gmail.com"  class="btn btn-primary" target="_blank" rel="noopener noreferrer" alt="My email" title="thorrellt@gmail.com">
-        <i class="bi bi-envelope"></i>
-    </a>
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-7 about--content">
+                <div class="row">
+                    <h1 class="display-4">About the Author</h1>
+                    <p>Hello world, I'm Thorrell Turner, a Washington Metropolitan based Software Developer transitioning into tech after 15+ years in public relations & customer service. </p>
+                    <p>For more of my work, you can visit my portfolio below.</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="https://www.thorrellt.com/"   target="_blank" rel="noopener noreferrer" alt="My Portfolio"
+                            title="www.thorrellt.com" class="btn btn-danger">My Portfolio</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="row">
+                    <img src="./profile_pic.png" class="about--profile-pic mx-auto " alt="Thorrell's Profile Picture" />
+                </div>
+                <div class="row mx-5 my-3">
+                    <div class="col about--link">
+                        <a href="https://github.com/thorrellt" class="btn btn-primary " target="_blank"
+                            rel="noopener noreferrer" alt="My Github" title="github.com/thorrellt">
+                            <i class="bi bi-github"></i>
+                        </a>
+                    </div>
+                    <div class="col about--link">
+                        <a href="https://www.linkedin.com/in/thorrellt/" class="btn btn-primary" target="_blank"
+                            rel="noopener noreferrer" alt="My Linkedin" title="linkedin.com/in/thorrellt">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                    <div class="col about--link">
+                        <a href="mailto:thorrellt@gmail.com" class="btn btn-primary " target="_blank"
+                            rel="noopener noreferrer" alt="My email" title="thorrellt@gmail.com" >
+                            <i class="bi bi-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
 
 </body>
+
 </html>

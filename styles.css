@@ -1,30 +1,17 @@
-.portfolioBtn {
-    outline: 4px solid green;
-    cursor: pointer;
-    box-sizing: border-box;
-    appearance: none;
-    background-color: transparent;
-    border: 2px solid #3489eb;
-    border-radius: 0.6em;
-    color: #3489eb;
-    cursor: pointer;
-    display: flex;
-    align-self: center;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1;
-    margin: 20px;
-    padding: 1.2em 2.8em;
-    text-decoration: none;
-    text-align: center;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #fff;
-    box-shadow: 0 0 40px 40px #3489eb inset, 0 0 0 0 #3489eb;
-    transition: all 150ms ease-in-out;
-}
+
 
 .portfolioBtn:hover{
     box-shadow: 0 0 10px 0 #3489eb inset, 0 0 10px 4px #3489eb;
+}
+
+.about--profile-pic{
+    max-width: 75%;
+    -webkit-filter: drop-shadow(5px 5px 5px #666666);
+    filter: drop-shadow(5px 5px 5px #666666);
+}
+
+.about--link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
