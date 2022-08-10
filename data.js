@@ -114,7 +114,7 @@ const commonCallData = {
     },
     'sw-no-trash': {
         subject: "Solid Waste-No County Trash Service",
-        notes: "Solid Waste-No County Trash Service"
+        notes: "Advised we do not provide trash to this address."
     },
     'sw-station': {
         subject: "Solid Waste-Transfer Station Info",
