@@ -10,7 +10,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a id="nav--home" class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                <a id="nav--home" class="nav-link" aria-current="page" href="./index.html">Home</a>
+                <a id="nav--about-app" class="nav-link" href="./about-the-app.html">About the App</a>
                 <a id="nav--btc" class="nav-link" href="./behind-the-code.html">Behind the Code</a>
                 <a id="nav--author" class="nav-link" href="./author.html">About the Author</a>
             </div>
@@ -19,34 +20,22 @@
 </nav>
 
 <script>
-    function navHome() {
-        document.getElementById("nav--home").classList.add("active");
-        document.getElementById("nav--btc").classList.remove("active");
-        document.getElementById("nav--author").classList.remove("active");
-    }
-    function navBTC() {
-        document.getElementById("nav--home").classList.remove("active");
-        document.getElementById("nav--btc").classList.add("active");
-        document.getElementById("nav--author").classList.remove("active");
-    }
-    function navAuthor() {
-        document.getElementById("nav--home").classList.remove("active");
-        document.getElementById("nav--btc").classList.remove("active");
-        document.getElementById("nav--author").classList.add("active");
-    }
 
     let page = window.location.pathname.split("/").pop();
     console.log(page);
 
     switch (page) {
         case "index.html":
-            navHome()
+            document.getElementById("nav--home").classList.add("active");
+            break;
+        case "about-the-app.html":
+            document.getElementById("nav--about-app").classList.add("active");
             break;
         case "behind-the-code.html":
-            navBTC()
+            document.getElementById("nav--btc").classList.add("active");
             break;
         case "author.html":
-            navAuthor()
+            document.getElementById("nav--author").classList.add("active");
             break;
     }
 </script>
