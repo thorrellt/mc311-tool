@@ -12,6 +12,7 @@ const lastNotesDisplay = document.getElementById('last-notes-display');
 
 
 function updateDisplay(newText){
+    $('#main-title').text("Last Notes Copied:");
     $(lastNotesDisplay).text(newText);
 }
 
