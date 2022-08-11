@@ -4,7 +4,7 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(function(){ $("head").load("head.html") });
+        $(function () { $("head").load("head.html") });
     </script>
 
     <title>MC 311 Tool-Behind the Code</title>
@@ -15,6 +15,42 @@
 
     <div class="container my-3">
         <h1 class="display-6">Behind the Code</h1>
+    </div>
+    <div class="container mx-5">
+        <div class="container mx-5">
+            <p>This was my first project after learning Bootstrap 5. It served as a chance to reinforce what I learned
+                about
+                Bootstrap, as well as good practice with working with the DOM and maninpulating objects and arrays in
+                JaveScript.</p>
+        </div>
+        <div class="container mx-5">
+            <p>The basic idea leveraged common functions, like copying data to the clipboard, updating the users
+                display,
+                and building list. From there I built functions to generate & format the proper data and notes, and
+                passed
+                them.</p>
+            <img src="./assets/utilities.png" class="img-fluid rounded mx-auto d-block code-image"
+                alt="Utility Functions">
+        </div>
+        <div class="container mt-4 mx-5">
+            <p>Some sections were fairly straight forward, simply grabbing user inputs, and forming a string around them
+            </p>
+            <img src="./assets/ride-on-arrival.png" class="img-fluid rounded mx-auto d-block code-image"
+                alt="Ride On Arrival Code">
+        </div>
+        <div class="container mt-4 mx-5">
+            <p>Some required accompanying data to build the notes for the user, or provide them information. All data
+                was stored in objects, some nested (like the stop ID locator.)</p>
+                <img src="./assets/stop-id-data.png" class="img-fluid rounded mx-auto d-block code-image"
+                alt="Stop ID Data">
+        </div>
+        <div class="container mt-4 mx-5">
+            <p>Then the ojects were cross-referenced to output to correct data.</p>
+            <img src="./assets/update-stop-id.png" class="img-fluid rounded mx-auto d-block code-image"
+                alt="Stop ID Logic">
+        </div>
+
+
     </div>
 </body>
 
