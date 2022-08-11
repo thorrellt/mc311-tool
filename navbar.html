@@ -32,15 +32,19 @@
     switch (page) {
         case "index.html":
             document.getElementById("nav--home").classList.add("active");
+            $("head").append( "<title>MC 311 Tool</title>");
             break;
         case "about-the-app.html":
             document.getElementById("nav--about-app").classList.add("active");
+            $("head").append( "<title>MC 311 Tool-About the App</title>");
             break;
         case "behind-the-code.html":
             document.getElementById("nav--btc").classList.add("active");
+            $("head").append( "<title>MC 311 Tool-Behind the Code</title>");
             break;
         case "author.html":
             document.getElementById("nav--author").classList.add("active");
+            $("head").append( "<title>MC 311 Tool-About the Author</title>");
             break;
     }
 </script>
