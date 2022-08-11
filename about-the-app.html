@@ -2,23 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(function () {
-            $("#navbar").load("./navbar.html");
-        });
+        $(function(){ $("head").load("head.html") });
     </script>
-
     <title>MC 311 Tool-About the App</title>
 </head>
 
@@ -30,7 +17,7 @@
     </div>
     <div class="container row justify-content-center">
         <div class="col-5 mx-2">
-            <h3>The MC311 Note Tool</h3>
+            <h4>The MC311 Note Tool</h4>
             <p>Montgomery County, Maryland&apos;s 311 phone number (known simply as MC311) serves as the main entry
                 point for residents to access public information and government services. This application was built to
                 help increase the speed and efficiency that the representatives from MC311 can access information and
@@ -39,7 +26,7 @@
                 would help representatives assist more residents.</p>
         </div>
         <div class="col-5 mx-2">
-            <h3>General tips for users</h3>
+            <h4>General tips for users</h4>
             <ul>
                 <li>The next input field can be jumped to by hitting tab, including the copy button
                     <button id="about-copy-btn" type="" class="btn btn-primary" disabled>
