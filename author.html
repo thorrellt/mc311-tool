@@ -2,15 +2,19 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="../styles/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(function(){ $("head").load("head.html") });
+        $(function () { $("head").load("head.html") });
     </script>
 
     <title>MC 311 Tool-About the Author</title>
 </head>
 
 <body>
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
     <div id="navbar"></div>
 
     <div class="container">
@@ -18,19 +22,21 @@
             <div class="col-lg-7 col-12 about--content">
                 <div class="row">
                     <h1 class="display-6">About the Author</h1>
-                    <p class="mx-2">Hello world, I'm Thorrell Turner, a Washington Metropolitan based Software Developer transitioning into tech after 15+ years in public relations & customer service. </p>
+                    <p class="mx-2">Hello world, I'm Thorrell Turner, a Washington Metropolitan based Software Developer
+                        transitioning into tech after 15+ years in public relations & customer service. </p>
                     <p class="mx-2">For more of my work, you can visit my portfolio below.</p>
                 </div>
                 <div class="row">
                     <div class="col mx-2">
-                        <a href="https://www.thorrellt.com/"   target="_blank" rel="noopener noreferrer" alt="My Portfolio"
-                            title="www.thorrellt.com" class="btn btn-danger">My Portfolio</a>
+                        <a href="https://www.thorrellt.com/" target="_blank" rel="noopener noreferrer"
+                            alt="My Portfolio" title="www.thorrellt.com" class="btn btn-danger">My Portfolio</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5 col-12">
                 <div class="row">
-                    <img src="./assets/profile_pic.png" class="about--profile-pic mx-auto " alt="Thorrell's Profile Picture" />
+                    <img src="./assets/profile_pic.png" class="about--profile-pic mx-auto "
+                        alt="Thorrell's Profile Picture" />
                 </div>
                 <div class="row mx-5 my-3">
                     <div class="col about--link">
@@ -47,7 +53,7 @@
                     </div>
                     <div class="col about--link">
                         <a href="mailto:thorrellt@gmail.com" class="btn btn-primary " target="_blank"
-                            rel="noopener noreferrer" alt="My email" title="thorrellt@gmail.com" >
+                            rel="noopener noreferrer" alt="My email" title="thorrellt@gmail.com">
                             <i class="bi bi-envelope"></i>
                         </a>
                     </div>
@@ -55,12 +61,8 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 </body>
+
+<script src="./scripts/scripts.js" type="module"></script>
 
 </html>

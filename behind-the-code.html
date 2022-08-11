@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="../styles/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(function () { $("head").load("head.html") });
@@ -11,8 +12,12 @@
 </head>
 
 <body>
-    <div id="navbar"></div>
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
 
+    <div id="navbar"></div>
+    
     <div class="container my-3">
         <h1 class="display-6">Behind the Code</h1>
     </div>
@@ -41,7 +46,7 @@
         <div class="container mt-4 mx-5">
             <p>Some required accompanying data to build the notes for the user, or provide them information. All data
                 was stored in objects, some nested (like the stop ID locator.)</p>
-                <img src="./assets/stop-id-data.png" class="img-fluid rounded mx-auto d-block code-image"
+            <img src="./assets/stop-id-data.png" class="img-fluid rounded mx-auto d-block code-image"
                 alt="Stop ID Data">
         </div>
         <div class="container mt-4 mx-5">
@@ -53,6 +58,8 @@
 
     </div>
 </body>
+
+<script src="./scripts/scripts.js" type="module"></script>
 
 
 </html>
