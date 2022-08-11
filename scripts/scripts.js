@@ -13,7 +13,7 @@ function clearList(listName) {
 }
 
 function showToast(){
-    $('.toast').toast('show');
+    // $('.toast').toast('show');
 }
 
 const lastNotesDisplay = document.getElementById('last-notes-display');
