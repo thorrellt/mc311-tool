@@ -166,8 +166,12 @@ const xferData =
         phone: "7-3986"
     },
     "hhs-oess": {
-        name: "HHS: Office of Eligibilty and Support Services",
+        name: "HHS: Office of Eligibility and Support Services",
         phone: "7-1003"
+    },
+    "cupf-cupf": {
+        name: "CUPF: Community Use of Public Facilities",
+        phone: "7-2725"
     },
     "non-boe": {
         name: "Maryland State Board of Electricians",
