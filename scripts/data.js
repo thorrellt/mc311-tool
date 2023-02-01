@@ -133,6 +133,14 @@ const commonCallData = {
     'rrp-status': {
         subject: "RRP-How to check status",
         notes: "Advised RRP status can be checked by logging into RRP portal or emailing HHS@montgomerycountymd.gov."
+    },
+    'sw-midded-trash': {
+        subject: "SW-Missed Trash",
+        notes: "Missed Trash. 1 can. Out before 7am. No stickers. Still on curb"
+    },
+    'sw-missed-recycling': {
+        subject: "SW-Missed Recycling",
+        notes: "Missed Recycling. 1 bin and 1 cart. Out before 7am. No stickers. Still on curb."
     }
 }
 
