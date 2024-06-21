@@ -1,0 +1,13 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.closeknit.closeknit",
+        "sha256_cert_fingerprints": [
+          "EA:8F:12:12:FF:55:F2:CC:29:78:9D:86:AF:72:EF:1A:B0:BC:61:C9:08:F6:AE:30:6C:30:0B:54:EC:48:DB:E0"
+        ]
+      }
+    }
+  ]
+  
